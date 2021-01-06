@@ -4,7 +4,7 @@
 
 <script>
     export default {
-        name: "public_master"
+        name: "AdminMaster"
     }
 </script>
 
