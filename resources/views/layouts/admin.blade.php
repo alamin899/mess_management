@@ -24,6 +24,7 @@
     <div class="content-wrapper">
         <!-- Main content -->
         <section class="content">
+            <admin-master></admin-master>
             @yield('content')
         </section>
         <!-- /.content -->
@@ -36,3 +37,9 @@
 <script src="{{ asset('js/app.js') }}" defer></script>
 </body>
 </html>
+<script>
+    import AdminMaster from "../../js/components/admin/AdminMaster";
+    export default {
+        components: {AdminMaster}
+    }
+</script>
