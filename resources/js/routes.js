@@ -1,3 +1,6 @@
+import adminDashboard from './components/admin/dashboard.vue'
+import adminMaster from './components/admin/AdminMaster.vue'
 export const routes = [
-    { path: '/example-component', component: 'example-component' },
+    { path: '/admin-dashboard', component: 'adminDashboard' },
+    { path: '/admin-master', component: 'adminMaster' },
 ]
