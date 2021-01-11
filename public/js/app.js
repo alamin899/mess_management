@@ -53226,7 +53226,8 @@ __webpack_require__.r(__webpack_exports__);
 var routes = [{
   path: '/admin-dashboard',
   component: 'adminDashboard'
-}, {
+}, //dashboard
+{
   path: '/admin-master',
   component: 'adminMaster'
 }];
