@@ -8,7 +8,7 @@
     <link href="{{asset('css/app.css')}}" rel="stylesheet" crossorigin="anonymous">
 
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini" >
 <!-- Site wrapper -->
 <div class="wrapper" id="app">
     <!-- Navbar -->
@@ -25,7 +25,6 @@
         <!-- Main content -->
         <section class="content">
             <admin-master></admin-master>
-            @yield('content')
         </section>
         <!-- /.content -->
     </div>
@@ -34,12 +33,6 @@
     @include('Backend.include.footer')
 
 </div>
-<script src="{{ asset('js/app.js') }}" defer></script>
+<script src="{{ asset('/js/app.js') }}"></script>
 </body>
 </html>
-<script>
-    import AdminMaster from "../../js/components/admin/AdminMaster";
-    export default {
-        components: {AdminMaster}
-    }
-</script>

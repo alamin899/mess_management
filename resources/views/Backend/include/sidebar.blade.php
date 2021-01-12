@@ -17,7 +17,7 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">
                 <li class="nav-item">
-                    <router-link to="/admin-dashboard" class="nav-link">
+                    <router-link to="admin-dashboard" class="nav-link">
                             Dashboard
                     </router-link>
                 </li>

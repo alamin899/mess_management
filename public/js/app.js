@@ -1985,8 +1985,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "dashboard"
+  name: "dashboard",
+  mounted: function mounted() {
+    console.log("this is test console");
+  }
 });
 
 /***/ }),
@@ -37659,7 +37669,23 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [_c("title", [_vm._v("This is Dashboard Page")])])
+    return _c("div", [
+      _c("h1", [_vm._v("This is Dashboard Page")]),
+      _vm._v(" "),
+      _c("h1", [_vm._v("This is Dashboard Page")]),
+      _vm._v(" "),
+      _c("h1", [_vm._v("This is Dashboard Page")]),
+      _vm._v(" "),
+      _c("title", [_vm._v("This is Dashboard Page")]),
+      _vm._v(" "),
+      _c("title", [_vm._v("This is Dashboard Page")]),
+      _vm._v(" "),
+      _c("title", [_vm._v("This is Dashboard Page")]),
+      _vm._v(" "),
+      _c("title", [_vm._v("This is Dashboard Page")]),
+      _vm._v(" "),
+      _c("title", [_vm._v("This is Dashboard Page")])
+    ])
   }
 ]
 render._withStripped = true
@@ -52926,7 +52952,7 @@ __webpack_require__(/*! ./component_register */ "./resources/js/component_regist
 /** Vue Js **/
 
 
-window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+Window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /**  Vue Router  **/
 
 
@@ -52950,6 +52976,7 @@ var app = new Vue({
 /***/ (function(module, exports, __webpack_require__) {
 
 window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
  * for JavaScript based Bootstrap features such as modals and tabs. This
@@ -52999,6 +53026,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /**  Component register  */
 Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
 Vue.component('admin-dashboard', __webpack_require__(/*! ./components/admin/dashboard.vue */ "./resources/js/components/admin/dashboard.vue")["default"]);
+Vue.component('admin-master', __webpack_require__(/*! ./components/admin/AdminMaster.vue */ "./resources/js/components/admin/AdminMaster.vue")["default"]);
 
 /***/ }),
 
@@ -53225,11 +53253,11 @@ __webpack_require__.r(__webpack_exports__);
 
 var routes = [{
   path: '/admin-dashboard',
-  component: 'adminDashboard'
+  component: _components_admin_dashboard_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
 }, //dashboard
 {
   path: '/admin-master',
-  component: 'adminMaster'
+  component: _components_admin_AdminMaster_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
 }];
 
 /***/ }),

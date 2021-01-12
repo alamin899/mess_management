@@ -3,15 +3,15 @@ require('./bootstrap');
 require('./component_register')
 
 /** Vue Js **/
-window.Vue = require('vue');
+Window.Vue = require('vue');
 
 /**  Vue Router  **/
-import {routes} from './routes'
+import {routes}
+from './routes'
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 const router = new VueRouter({
     routes,
-    
 })
 
 
