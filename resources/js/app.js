@@ -14,8 +14,17 @@ const router = new VueRouter({
     routes,
 })
 
+/**   VueX   **/
+import Vuex from 'vuex'
+Vue.use(Vuex)
+import storeIndex from './store/index'
+const store = new Vuex.Store(
+    storeIndex
+)
+
 
 const app = new Vue({
     el: '#app',
     router,
+    store,
 });
