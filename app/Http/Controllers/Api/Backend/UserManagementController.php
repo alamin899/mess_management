@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Api\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Repositories\UserManagementRepository;
+use App\Http\Requests\UserRequest;
 use App\Http\Resources\UserResource;
+use App\Http\Traits\ApiReturnMessage;
 use Illuminate\Http\Request;
 
 class UserManagementController extends Controller
@@ -44,9 +46,18 @@ class UserManagementController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $userRequest)
     {
-        //
+        $userStore = $this->userManagementRepository->store($userRequest);
+        if ($userStore)
+        {
+            return response()->json([
+                'message' => "success"
+            ],200);
+        }
+        else return response()->json([
+            'message' => "failed",
+        ]);
     }
 
     /**

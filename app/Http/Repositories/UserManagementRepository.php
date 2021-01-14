@@ -5,6 +5,8 @@ namespace App\Http\Repositories;
 
 
 use App\Models\User;
+use http\Env\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserManagementRepository
 {
@@ -12,6 +14,17 @@ class UserManagementRepository
     {
         return $this->getUsers()->paginate(config('constant.PAGINATE'));
     }
+
+    public function store($request)
+    {
+        return User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'status' => $request->status,
+            'password' => Hash::make($request->password),
+        ]);
+    }
+
 
     public function getUsers($name = '' , $email = '' )
     {
