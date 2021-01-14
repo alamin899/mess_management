@@ -2061,6 +2061,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "index",
   data: function data() {
@@ -42309,6 +42316,27 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
     _c("br"),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "vld-parent" },
+      [
+        _c("Loading", {
+          attrs: {
+            active: _vm.isLoading,
+            "can-cancel": true,
+            loader: _vm.bars,
+            "is-full-page": _vm.fullPage
+          },
+          on: {
+            "update:active": function($event) {
+              _vm.isLoading = $event
+            }
+          }
+        })
+      ],
+      1
+    ),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-md-12 col-sm-12" }, [
