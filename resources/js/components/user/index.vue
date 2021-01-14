@@ -1,6 +1,13 @@
 <template>
     <div class="container">
         <br>
+        <div class="vld-parent">
+            <Loading :active.sync="isLoading"
+                     :can-cancel="true"
+                     :loader="bars"
+                     :is-full-page="fullPage">
+            </Loading>
+        </div>
         <div class="row">
             <div class="col-md-12 col-sm-12">
                 <div class="card">
@@ -52,11 +59,19 @@
 <script>
     export default {
         name: "index",
+        data() {
+            return {
+                isLoading: false,
+                fullPage: true
+            }
+        },
         mounted() {
+            this.isLoading = true
             this.$store.dispatch("users")
         },
         computed:{
             getUsers(){
+                this.isLoading = false
                 return this.$store.getters.getUsers
             }
         }

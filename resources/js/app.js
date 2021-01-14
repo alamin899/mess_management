@@ -22,6 +22,9 @@ const store = new Vuex.Store(
     storeIndex
 )
 
+/**   VueJs Loader   **/
+import Loading from 'vue-loading-overlay';
+Vue.component('Loading',Loading)
 
 const app = new Vue({
     el: '#app',
