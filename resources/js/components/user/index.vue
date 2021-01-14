@@ -13,6 +13,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">User</h3>
+                        <a href="#" class="btn btn-primary float-right">Add User</a>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
