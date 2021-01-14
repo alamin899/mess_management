@@ -52,11 +52,19 @@
 <script>
     export default {
         name: "index",
+        data() {
+            return {
+                isLoading: false,
+                fullPage: true
+            }
+        },
         mounted() {
+            this.isLoading = true
             this.$store.dispatch("users")
         },
         computed:{
             getUsers(){
+                this.isLoading = false
                 return this.$store.getters.getUsers
             }
         }
