@@ -13,6 +13,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">User</h3>
+                        <router-link to="user-create" class="btn btn-primary float-right">Add User</router-link>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">

@@ -26,6 +26,12 @@ const store = new Vuex.Store(
 import Loading from 'vue-loading-overlay';
 Vue.component('Loading',Loading)
 
+/**   Start for vuejs vform for form validation   **/
+import { Form, HasError, AlertError } from 'vform'
+window.Form=Form
+Vue.component(HasError.name, HasError)
+Vue.component(AlertError.name, AlertError)
+
 const app = new Vue({
     el: '#app',
     router,
