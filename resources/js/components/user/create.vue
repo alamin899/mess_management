@@ -11,18 +11,29 @@
                     <form role="form" @submit.prevent="userStore" @keydown="form.onKeydown($event)">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="userName">User Name</label>
                                         <input type="text" v-model="form.name" class="form-control" :class="{ 'is-invalid': form.errors.has('name') }" id="userName" placeholder="Enter Name">
                                         <has-error :form="form" field="name"></has-error>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="userEmail">Email Address</label>
                                         <input type="email" v-model="form.email" class="form-control" :class="{ 'is-invalid': form.errors.has('email') }" id="userEmail" placeholder="Enter email">
                                         <has-error :form="form" field="email"></has-error>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="profile">Profile Image</label>
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="profile">
+                                                <label class="custom-file-label" for="profile"></label>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
