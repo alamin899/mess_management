@@ -2086,9 +2086,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "create",
   data: function data() {
@@ -2097,20 +2094,38 @@ __webpack_require__.r(__webpack_exports__);
         name: '',
         email: '',
         password: '',
+        image: '',
         password_confirmation: '',
         status: 1
       })
     };
   },
   methods: {
-    userStore: function userStore() {
+    changePhoto: function changePhoto(event) {
       var _this = this;
+
+      var file = event.target.files[0];
+
+      if (file.size > 1048576) {
+        alert("file size over");
+      } else {
+        var reader = new FileReader();
+
+        reader.onload = function (event) {
+          _this.form.image = event.target.result;
+        };
+
+        reader.readAsDataURL(file);
+      }
+    },
+    userStore: function userStore() {
+      var _this2 = this;
 
       this.form.post('/api/user').then(function (response) {
         if (response.data.message == "success") {
-          _this.$router.push('/user');
+          _this2.$router.push('/user');
 
-          _this.form.reset();
+          _this2.form.reset();
         }
       });
     }
@@ -2187,6 +2202,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "index",
   data: function data() {
@@ -2203,6 +2220,11 @@ __webpack_require__.r(__webpack_exports__);
     getUsers: function getUsers() {
       this.isLoading = false;
       return this.$store.getters.getUsers;
+    }
+  },
+  methods: {
+    ourImage: function ourImage(image) {
+      return "file/images/" + image;
     }
   }
 });
@@ -43568,7 +43590,41 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _vm._m(1)
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c(
+                      "div",
+                      { staticClass: "form-group" },
+                      [
+                        _c("label", { attrs: { for: "profile" } }, [
+                          _vm._v("Profile Image")
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          class: { "is-invalid": _vm.form.errors.has("image") },
+                          attrs: { id: "profile", name: "image", type: "file" },
+                          on: {
+                            change: function($event) {
+                              return _vm.changePhoto($event)
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("img", {
+                          attrs: {
+                            src: _vm.form.image,
+                            alt: "",
+                            width: "80",
+                            height: "80"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("has-error", {
+                          attrs: { form: _vm.form, field: "image" }
+                        })
+                      ],
+                      1
+                    )
+                  ])
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "row" }, [
@@ -43780,30 +43836,6 @@ var staticRenderFns = [
     return _c("div", { staticClass: "card-header" }, [
       _c("h3", { staticClass: "card-title" }, [_vm._v("User Create")])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-4" }, [
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "profile" } }, [_vm._v("Profile Image")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "input-group" }, [
-          _c("div", { staticClass: "custom-file" }, [
-            _c("input", {
-              staticClass: "custom-file-input",
-              attrs: { type: "file", id: "profile" }
-            }),
-            _vm._v(" "),
-            _c("label", {
-              staticClass: "custom-file-label",
-              attrs: { for: "profile" }
-            })
-          ])
-        ])
-      ])
-    ])
   }
 ]
 render._withStripped = true
@@ -43892,6 +43924,17 @@ var render = function() {
                       _vm._v(" "),
                       _c("td", [_vm._v(_vm._s(user.email))]),
                       _vm._v(" "),
+                      _c("td", [
+                        _c("img", {
+                          attrs: {
+                            src: _vm.ourImage(user.image),
+                            alt: "",
+                            width: "50",
+                            height: "60"
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
                       _vm._m(1, true)
                     ])
                   }),
@@ -43923,6 +43966,8 @@ var staticRenderFns = [
         _c("th", { staticClass: "text-center" }, [_vm._v("Name")]),
         _vm._v(" "),
         _c("th", { staticClass: "text-center" }, [_vm._v("Email")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Photo")]),
         _vm._v(" "),
         _c("th", { staticClass: "text-center" }, [_vm._v("Action")])
       ])

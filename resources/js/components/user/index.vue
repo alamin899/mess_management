@@ -23,6 +23,7 @@
                                 <th style="width: 10px" class="text-center">#SL</th>
                                 <th class="text-center">Name</th>
                                 <th class="text-center">Email</th>
+                                <th class="text-center">Photo</th>
                                 <th class="text-center">Action</th>
                             </tr>
                             </thead>
@@ -31,6 +32,7 @@
                                 <td>{{index+1}}</td>
                                 <td>{{user.name}}</td>
                                 <td>{{user.email}}</td>
+                                <td><img :src="ourImage(user.image)" alt="" width="50" height="60"></td>
                                 <td class="text-center">
                                     <a><span class="material-icons"  title="edit">edit</span></a>
                                     <a><span class="material-icons" style="color: red;" title="delete">delete</span></a>
@@ -74,6 +76,11 @@
             getUsers(){
                 this.isLoading = false
                 return this.$store.getters.getUsers
+            }
+        },
+        methods:{
+            ourImage(image){
+                return "file/images/"+image
             }
         }
     }

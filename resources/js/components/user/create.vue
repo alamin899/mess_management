@@ -26,14 +26,11 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="form-group">
+                                    <div class="form-group" >
                                         <label for="profile">Profile Image</label>
-                                        <div class="input-group">
-                                            <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="profile">
-                                                <label class="custom-file-label" for="profile"></label>
-                                            </div>
-                                        </div>
+                                        <input @change = "changePhoto($event)" id="profile" name="image" type="file" :class="{ 'is-invalid': form.errors.has('image') }">
+                                        <img :src="form.image" alt="" width="80" height="80">
+                                        <has-error :form="form" field="image"></has-error>
                                     </div>
                                 </div>
                             </div>
@@ -87,6 +84,7 @@
                         name:'',
                         email:'',
                         password:'',
+                        image:'',
                         password_confirmation:'',
                         status:1,
                     }
@@ -94,6 +92,18 @@
             }
         },
         methods:{
+            changePhoto(event){
+                let file = event.target.files[0];
+                if(file.size>1048576){
+                   alert("file size over");
+                }else{
+                    let reader = new FileReader();
+                    reader.onload = event => {
+                        this.form.image = event.target.result
+                    };
+                    reader.readAsDataURL(file);
+                }
+            },
             userStore(){
                 this.form.post('/api/user')
                     .then((response)=>{
