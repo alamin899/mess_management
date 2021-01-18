@@ -38,8 +38,9 @@ class UserManagementRepository
             $img = Image::make($image)->resize(200, 200);
             $folderPath = "file/images/";
             $upload_path = public_path()."/".$folderPath;
-            $img->save($upload_path.$name);
-            return $name;
+            if ($img->save($upload_path.$name)){
+                return $name;
+            }
         }
         else return null;
     }
