@@ -7,6 +7,7 @@ namespace App\Http\Repositories;
 use App\Models\User;
 use http\Env\Request;
 use Illuminate\Support\Facades\Hash;
+use Image;
 
 class UserManagementRepository
 {
@@ -20,9 +21,26 @@ class UserManagementRepository
         return User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'image' => $this->imageUpload($request->image),
             'status' => $request->status,
             'password' => Hash::make($request->password),
         ]);
+    }
+
+
+    public function imageUpload($image)
+    {
+        $strpos = strpos($image,';');   //position of ";"
+        $sub = substr($image,0,$strpos);  // only part of index 0 to starposition from image
+        $extention = explode('/',$sub)[1];   // divide an array into part where "/" here [1] means second part of "/"
+        $name = time().".".$extention;                //image extenction
+        $img = Image::make($image)->resize(200, 200);
+        $folderPath = "file/images/";
+        $upload_path = public_path()."/".$folderPath;
+        if ($img->save($upload_path.$name)){
+            return $name;
+        }
+        else return null;
     }
 
 
