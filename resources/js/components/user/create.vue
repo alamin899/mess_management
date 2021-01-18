@@ -110,6 +110,16 @@
                         if (response.data.message == "success"){
                             this.$router.push('/user')
                             this.form.reset()
+                            toast.fire({
+                                icon: 'success',
+                                title: 'User Created successfully'
+                            })
+                        }
+                        else {
+                            toast.fire({
+                                icon: 'error',
+                                title: 'Failed To Insert '
+                            })
                         }
                     })
             }
