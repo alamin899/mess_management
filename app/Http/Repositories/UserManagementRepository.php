@@ -30,14 +30,15 @@ class UserManagementRepository
 
     public function imageUpload($image)
     {
-        $strpos = strpos($image,';');   //position of ";"
-        $sub = substr($image,0,$strpos);  // only part of index 0 to starposition from image
-        $extention = explode('/',$sub)[1];   // divide an array into part where "/" here [1] means second part of "/"
-        $name = time().".".$extention;                //image extenction
-        $img = Image::make($image)->resize(200, 200);
-        $folderPath = "file/images/";
-        $upload_path = public_path()."/".$folderPath;
-        if ($img->save($upload_path.$name)){
+        if ($image){
+            $strpos = strpos($image,';');   //position of ";"
+            $sub = substr($image,0,$strpos);  // only part of index 0 to starposition from image
+            $extention = explode('/',$sub)[1];   // divide an array into part where "/" here [1] means second part of "/"
+            $name = time().".".$extention;                //image extenction
+            $img = Image::make($image)->resize(200, 200);
+            $folderPath = "file/images/";
+            $upload_path = public_path()."/".$folderPath;
+            $img->save($upload_path.$name);
             return $name;
         }
         else return null;
