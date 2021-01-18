@@ -38,7 +38,7 @@ class UserManagementRepository
         $folderPath = "file/images/";
         $upload_path = public_path()."/".$folderPath;
         if ($img->save($upload_path.$name)){
-            return $upload_path.$name;
+            return $name;
         }
         else return null;
     }
