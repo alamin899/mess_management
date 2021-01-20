@@ -28,8 +28,8 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr v-for="(user,index) in getUsers.data">
-                                <td>{{index+1}}</td>
+                            <tr v-for="(user,index) in getUsersData">
+                                <td>{{pagination.from+index}}</td>
                                 <td>{{user.name}}</td>
                                 <td>{{user.email}}</td>
                                 <td><img :src="ourImage(user.image)" alt="" width="50" height="60"></td>
@@ -43,14 +43,13 @@
                         </table>
                     </div>
                     <!-- /.card-body -->
-                    <div class="card-footer clearfix">
-                        <ul class="pagination pagination-sm m-0 float-right">
-                            <li class="page-item"><a class="page-link" href="#">«</a></li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">»</a></li>
-                        </ul>
+                    <div class="card-footer">
+                        <pagination
+                                :pagination="this.pagination"
+                                :offset="5"
+                                :is-search  ="isSearch"
+                                @paginate="users"
+                        ></pagination>
                     </div>
                 </div>
                 <!-- /.card -->
@@ -65,23 +64,30 @@
         data() {
             return {
                 isLoading: false,
-                fullPage: true
+                fullPage: true,
+                isSearch: '',
+                getUsersData: '',
+                pagination:{
+                    current_page:1
+                },
             }
         },
         mounted() {
             this.isLoading = true
-            this.$store.dispatch("users")
-        },
-        computed:{
-            getUsers(){
-                this.isLoading = false
-                return this.$store.getters.getUsers
-            }
+            this.users()
         },
         methods:{
             ourImage(image){
                 return "file/images/"+image
-            }
+            },
+            users(){
+                axios.get('/api/user?page=' + this.pagination.current_page)
+                    .then((response)=>{
+                        this.getUsersData = response.data.data
+                        this.pagination = response.data.meta
+                        this.isLoading = false
+                    })
+            },
         }
     }
 </script>

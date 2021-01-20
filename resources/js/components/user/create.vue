@@ -26,11 +26,13 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="form-group" >
-                                        <label for="profile">Profile Image</label>
-                                        <input @change = "changePhoto($event)" id="profile" name="image" type="file" :class="{ 'is-invalid': form.errors.has('image') }">
-                                        <img :src="form.image" alt="" width="80" height="80">
-                                        <has-error :form="form" field="image"></has-error>
+                                    <div class="form-group" :class="{ 'is-invalid': form.errors.has('status') }">
+                                        <label>Status</label>
+                                        <select class="form-control" v-model="form.status">
+                                            <option value="1">Active</option>
+                                            <option value="2">Pending</option>
+                                        </select>
+                                        <has-error :form="form" field="status"></has-error>
                                     </div>
                                 </div>
                             </div>
@@ -50,13 +52,11 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="form-group" :class="{ 'is-invalid': form.errors.has('status') }">
-                                        <label>Status</label>
-                                        <select class="form-control" v-model="form.status">
-                                            <option value="1">Active</option>
-                                            <option value="2">Pending</option>
-                                        </select>
-                                        <has-error :form="form" field="status"></has-error>
+                                    <div class="form-group" >
+                                        <label for="profile">Profile Image</label>
+                                        <input @change = "changePhoto($event)" id="profile" name="image" type="file" :class="{ 'is-invalid': form.errors.has('image') }">
+                                        <img :src="form.image" alt="" width="80" height="80">
+                                        <has-error :form="form" field="image"></has-error>
                                     </div>
                                 </div>
                             </div>
