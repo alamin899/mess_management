@@ -34,7 +34,7 @@
                                 <td>{{user.email}}</td>
                                 <td><img :src="ourImage(user.image)" alt="" width="50" height="60"></td>
                                 <td class="text-center">
-                                    <a><span class="material-icons"  title="edit">edit</span></a>
+                                    <router-link :to="`user-edit/${user.id}`"><span class="material-icons"  title="edit">edit</span></router-link>
                                     <a><span class="material-icons" style="color: red;" title="delete">delete</span></a>
                                     <a><span class="material-icons" title="restore" style="color: green">undo</span></a>
                                 </td>
