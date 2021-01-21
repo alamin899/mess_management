@@ -68,7 +68,7 @@ class UserManagementController extends Controller
      */
     public function show($id)
     {
-        //
+        return new UserResource($this->userManagementRepository->show($id));
     }
 
     /**
@@ -91,7 +91,19 @@ class UserManagementController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $userUpdate = $this->userManagementRepository->update($id , $request);
+        if ($userUpdate)
+        {
+            return response()->json([
+                'message' => "success"
+            ],200);
+        }
+        else
+        {
+            return response()->json([
+                'message' => "failed"
+            ]);
+        }
     }
 
     /**

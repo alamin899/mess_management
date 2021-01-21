@@ -7,6 +7,7 @@ Vue.component('admin-master', require('./components/admin/AdminMaster.vue').defa
 // User Management
 Vue.component('user-index', require('./components/user/index.vue').default);
 Vue.component('user-create', require('./components/user/create.vue').default);
+Vue.component('user-edit', require('./components/user/edit.vue').default);
 
 // pagination
 Vue.component('pagination', require('./components/custome/pagination').default);

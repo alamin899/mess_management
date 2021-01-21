@@ -16,6 +16,11 @@ class UserManagementRepository
         return $this->getUsers()->paginate(config('constant.PAGINATE'));
     }
 
+    public function show($id)
+    {
+        return $this->getUser($id);
+    }
+
     public function store($request)
     {
         return User::create([
@@ -27,6 +32,19 @@ class UserManagementRepository
         ]);
     }
 
+    public function update($id , $request)
+    {
+        $user = $this->getUser($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->status = $request->status;
+        if ($request->image != null)
+        {
+            $user->image = $this->imageUpload($request->image);
+        }
+        $user->update();
+        return $user;
+    }
 
     public function imageUpload($image)
     {
