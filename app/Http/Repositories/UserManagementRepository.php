@@ -34,7 +34,7 @@ class UserManagementRepository
             $strpos = strpos($image,';');
             $sub = substr($image,0,$strpos);
             $extention = explode('/',$sub)[1];
-            $name = time().".".$extention; 
+            $name = time().".".$extention;
             $img = Image::make($image)->resize(200, 200);
             $folderPath = "file/images/";
             $upload_path = public_path()."/".$folderPath;
