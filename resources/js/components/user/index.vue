@@ -33,9 +33,11 @@
                                 <td>{{user.name}}</td>
                                 <td>{{user.email}}</td>
                                 <td><img :src="ourImage(user.image)" alt="" width="50" height="60"></td>
-                                <td class="text-center">
+                                <td class="text-center" v-if="user.deleted_at == null">
                                     <router-link :to="`user-edit/${user.id}`"><span class="material-icons"  title="edit">edit</span></router-link>
-                                    <a><span class="material-icons" style="color: red;" title="delete">delete</span></a>
+                                    <a @click.prevent="userDelete(user.id)"><span class="material-icons" style="color: red;" title="delete">delete</span></a>
+                                </td>
+                                <td class="text-center" v-else>
                                     <a><span class="material-icons" title="restore" style="color: green">undo</span></a>
                                 </td>
                             </tr>
@@ -75,6 +77,9 @@
         mounted() {
             this.isLoading = true
             this.users()
+            Event.$on('usersEvent',()=>{
+                this.users()
+            })
         },
         methods:{
             ourImage(image){
@@ -87,6 +92,42 @@
                         this.pagination = response.data.meta
                         this.isLoading = false
                     })
+            },
+            userDelete(id)
+            {
+                Swal.fire({
+                    title: 'Are you sure?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.value) {
+                        axios.delete('/api/user/'+id)
+                            .then((response) => {
+                                if (response.data == true)
+                                {
+                                    Event.$emit('usersEvent')
+                                    toast.fire({
+                                        icon: 'success',
+                                        title: 'User deleted successfully'
+                                    })
+                                }
+                                else
+                                    toast.fire({
+                                        icon: 'error',
+                                        title: 'Something Went Wrong'
+                                    })
+                            })
+                            .catch(()=>{
+                                toast.fire({
+                                    icon: 'error',
+                                    title: 'Something Went Wrong'
+                                })
+                            })
+                    }
+                })
             },
         }
     }
