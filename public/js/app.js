@@ -2499,6 +2499,36 @@ __webpack_require__.r(__webpack_exports__);
           });
         }
       });
+    },
+    userRestore: function userRestore(id) {
+      Swal.fire({
+        title: 'Are you sure?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, Restore it!'
+      }).then(function (result) {
+        if (result.value) {
+          axios.patch('/api/user/' + id).then(function (response) {
+            if (response.data == true) {
+              Event.$emit('usersEvent');
+              toast.fire({
+                icon: 'success',
+                title: 'User Restored successfully'
+              });
+            } else toast.fire({
+              icon: 'error',
+              title: 'Something Went Wrong'
+            });
+          })["catch"](function () {
+            toast.fire({
+              icon: 'error',
+              title: 'Something Went Wrong'
+            });
+          });
+        }
+      });
     }
   }
 });
@@ -48268,7 +48298,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("td", [_vm._v(_vm._s(user.email))]),
                       _vm._v(" "),
-                      _c("td", [
+                      _c("td", { staticClass: "text-center" }, [
                         _c("img", {
                           attrs: {
                             src: _vm.ourImage(user.image),
@@ -48325,7 +48355,28 @@ var render = function() {
                             1
                           )
                         : _c("td", { staticClass: "text-center" }, [
-                            _vm._m(1, true)
+                            _c(
+                              "a",
+                              {
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    return _vm.userRestore(user.id)
+                                  }
+                                }
+                              },
+                              [
+                                _c(
+                                  "span",
+                                  {
+                                    staticClass: "material-icons",
+                                    staticStyle: { color: "green" },
+                                    attrs: { title: "restore" }
+                                  },
+                                  [_vm._v("undo")]
+                                )
+                              ]
+                            )
                           ])
                     ])
                   }),
@@ -48376,22 +48427,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { staticClass: "text-center" }, [_vm._v("Action")])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", [
-      _c(
-        "span",
-        {
-          staticClass: "material-icons",
-          staticStyle: { color: "green" },
-          attrs: { title: "restore" }
-        },
-        [_vm._v("undo")]
-      )
     ])
   }
 ]

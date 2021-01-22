@@ -27,7 +27,7 @@ class UserManagementController extends Controller
         {
             return UserResource::collection($this->userManagementRepository->index());
         }
-        abort(401 , 'unauthorized request');
+        abort(401 , 'Bad request');
     }
 
     /**
@@ -66,9 +66,14 @@ class UserManagementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id , Request $request)
     {
-        return new UserResource($this->userManagementRepository->show($id));
+        if ($request->ajax())
+        {
+            return new UserResource($this->userManagementRepository->show($id));
+        }
+        abort('401',"Bad Request");
+
     }
 
     /**
@@ -112,8 +117,21 @@ class UserManagementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id , Request $request)
     {
-        return $this->userManagementRepository->destroy($id);
+        if ($request->ajax())
+        {
+            return $this->userManagementRepository->destroy($id);
+        }
+        abort('401',"Bad Request");
+    }
+
+    public function restore($id , Request $request)
+    {
+        if ($request->ajax())
+        {
+            return $this->userManagementRepository->restore($id);
+        }
+        abort('401',"Bad Request");
     }
 }

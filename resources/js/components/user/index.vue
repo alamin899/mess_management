@@ -32,13 +32,13 @@
                                 <td>{{pagination.from+index}}</td>
                                 <td>{{user.name}}</td>
                                 <td>{{user.email}}</td>
-                                <td><img :src="ourImage(user.image)" alt="" width="50" height="60"></td>
+                                <td class="text-center"><img :src="ourImage(user.image)" alt="" width="50" height="60"></td>
                                 <td class="text-center" v-if="user.deleted_at == null">
                                     <router-link :to="`user-edit/${user.id}`"><span class="material-icons"  title="edit">edit</span></router-link>
                                     <a @click.prevent="userDelete(user.id)"><span class="material-icons" style="color: red;" title="delete">delete</span></a>
                                 </td>
                                 <td class="text-center" v-else>
-                                    <a><span class="material-icons" title="restore" style="color: green">undo</span></a>
+                                    <a @click.prevent="userRestore(user.id)"><span class="material-icons" title="restore" style="color: green">undo</span></a>
                                 </td>
                             </tr>
                             </tbody>
@@ -112,6 +112,42 @@
                                     toast.fire({
                                         icon: 'success',
                                         title: 'User deleted successfully'
+                                    })
+                                }
+                                else
+                                    toast.fire({
+                                        icon: 'error',
+                                        title: 'Something Went Wrong'
+                                    })
+                            })
+                            .catch(()=>{
+                                toast.fire({
+                                    icon: 'error',
+                                    title: 'Something Went Wrong'
+                                })
+                            })
+                    }
+                })
+            },
+            userRestore(id)
+            {
+                Swal.fire({
+                    title: 'Are you sure?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, Restore it!'
+                }).then((result) => {
+                    if (result.value) {
+                        axios.patch('/api/user/'+id)
+                            .then((response) => {
+                                if (response.data == true)
+                                {
+                                    Event.$emit('usersEvent')
+                                    toast.fire({
+                                        icon: 'success',
+                                        title: 'User Restored successfully'
                                     })
                                 }
                                 else
