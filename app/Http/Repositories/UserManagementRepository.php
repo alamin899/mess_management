@@ -13,7 +13,7 @@ class UserManagementRepository
 {
     public function index()
     {
-        return $this->getUsers()->paginate(config('constant.PAGINATE'));
+        return $this->getUsers('','',true)->paginate(config('constant.PAGINATE'));
     }
 
     public function show($id)
@@ -63,10 +63,14 @@ class UserManagementRepository
         else return null;
     }
 
-
-    public function getUsers($name = '' , $email = '' )
+    public function destroy($id)
     {
-        $users = User::query()->latest();
+        return $this->getUser($id)->delete();
+    }
+
+    public function getUsers($name = '' , $email = '' , $withTrashed = false)
+    {
+        ($withTrashed)?$users = User::withTrashed()->latest() : $users = User::query()->latest() ;
         $users->when((!empty($name)), function ($users) use ($name) {
             $users->where('name', $name);
         });
@@ -76,9 +80,16 @@ class UserManagementRepository
         return $users;
     }
 
-    public function getUser($id)
+    public function getUser($id , $withTrashed = false)
     {
-        return User::find($id);
+        if ($withTrashed)
+        {
+            $userDestroy = User::withTrashed()->find($id);
+        }
+        else{
+            $userDestroy = User::find($id);
+        }
+        return $userDestroy;
     }
 
 }

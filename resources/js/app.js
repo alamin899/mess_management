@@ -48,6 +48,10 @@ const toast = Swal.mixin({
 })
 window.toast=toast
 
+/** Event **/
+window.Event=new Vue();
+
+
 const app = new Vue({
     el: '#app',
     router,

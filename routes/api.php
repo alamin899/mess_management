@@ -19,3 +19,4 @@ Route::get('/user',[UserManagementController::class, 'index']);
 Route::post('/user',[UserManagementController::class, 'store']);
 Route::get('/user/{user_id}',[UserManagementController::class, 'show']);
 Route::put('/user/{user_id}',[UserManagementController::class, 'update']);
+Route::delete('/user/{user_id}',[UserManagementController::class, 'destroy']);

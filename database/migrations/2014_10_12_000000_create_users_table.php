@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->tinyInteger('status')->nullable();
             $table->text('image')->nullable();
             $table->rememberToken();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -114,6 +114,6 @@ class UserManagementController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return $this->userManagementRepository->destroy($id);
     }
 }

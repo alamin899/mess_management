@@ -2433,6 +2433,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "index",
   data: function data() {
@@ -2447,20 +2449,55 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
+    var _this = this;
+
     this.isLoading = true;
     this.users();
+    Event.$on('usersEvent', function () {
+      _this.users();
+    });
   },
   methods: {
     ourImage: function ourImage(image) {
       return "file/images/" + image;
     },
     users: function users() {
-      var _this = this;
+      var _this2 = this;
 
       axios.get('/api/user?page=' + this.pagination.current_page).then(function (response) {
-        _this.getUsersData = response.data.data;
-        _this.pagination = response.data.meta;
-        _this.isLoading = false;
+        _this2.getUsersData = response.data.data;
+        _this2.pagination = response.data.meta;
+        _this2.isLoading = false;
+      });
+    },
+    userDelete: function userDelete(id) {
+      Swal.fire({
+        title: 'Are you sure?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then(function (result) {
+        if (result.value) {
+          axios["delete"]('/api/user/' + id).then(function (response) {
+            if (response.data == true) {
+              Event.$emit('usersEvent');
+              toast.fire({
+                icon: 'success',
+                title: 'User deleted successfully'
+              });
+            } else toast.fire({
+              icon: 'error',
+              title: 'Something Went Wrong'
+            });
+          })["catch"](function () {
+            toast.fire({
+              icon: 'error',
+              title: 'Something Went Wrong'
+            });
+          });
+        }
       });
     }
   }
@@ -48242,31 +48279,54 @@ var render = function() {
                         })
                       ]),
                       _vm._v(" "),
-                      _c(
-                        "td",
-                        { staticClass: "text-center" },
-                        [
-                          _c(
-                            "router-link",
-                            { attrs: { to: "user-edit/" + user.id } },
+                      user.deleted_at == null
+                        ? _c(
+                            "td",
+                            { staticClass: "text-center" },
                             [
                               _c(
-                                "span",
+                                "router-link",
+                                { attrs: { to: "user-edit/" + user.id } },
+                                [
+                                  _c(
+                                    "span",
+                                    {
+                                      staticClass: "material-icons",
+                                      attrs: { title: "edit" }
+                                    },
+                                    [_vm._v("edit")]
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "a",
                                 {
-                                  staticClass: "material-icons",
-                                  attrs: { title: "edit" }
+                                  on: {
+                                    click: function($event) {
+                                      $event.preventDefault()
+                                      return _vm.userDelete(user.id)
+                                    }
+                                  }
                                 },
-                                [_vm._v("edit")]
+                                [
+                                  _c(
+                                    "span",
+                                    {
+                                      staticClass: "material-icons",
+                                      staticStyle: { color: "red" },
+                                      attrs: { title: "delete" }
+                                    },
+                                    [_vm._v("delete")]
+                                  )
+                                ]
                               )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _vm._m(1, true),
-                          _vm._v(" "),
-                          _vm._m(2, true)
-                        ],
-                        1
-                      )
+                            ],
+                            1
+                          )
+                        : _c("td", { staticClass: "text-center" }, [
+                            _vm._m(1, true)
+                          ])
                     ])
                   }),
                   0
@@ -48316,22 +48376,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { staticClass: "text-center" }, [_vm._v("Action")])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", [
-      _c(
-        "span",
-        {
-          staticClass: "material-icons",
-          staticStyle: { color: "red" },
-          attrs: { title: "delete" }
-        },
-        [_vm._v("delete")]
-      )
     ])
   },
   function() {
@@ -64940,6 +64984,9 @@ var toast = sweetalert2__WEBPACK_IMPORTED_MODULE_6___default.a.mixin({
   }
 });
 window.toast = toast;
+/** Event **/
+
+window.Event = new Vue();
 var app = new Vue({
   el: '#app',
   router: router,
