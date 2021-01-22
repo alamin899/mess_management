@@ -68,6 +68,11 @@ class UserManagementRepository
         return $this->getUser($id)->delete();
     }
 
+    public function restore($id)
+    {
+        return $this->getUser($id , true)->restore();
+    }
+
     public function getUsers($name = '' , $email = '' , $withTrashed = false)
     {
         ($withTrashed)?$users = User::withTrashed()->latest() : $users = User::query()->latest() ;
