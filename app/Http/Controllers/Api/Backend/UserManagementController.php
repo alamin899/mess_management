@@ -134,4 +134,17 @@ class UserManagementController extends Controller
         }
         abort('401',"Bad Request");
     }
+    public function passUpdate(Request $request,$id)
+    {
+        if ($request->ajax())
+        {
+            $this->validate($request,['password' => ['required', 'string', 'min:8', 'confirmed']]);
+            $userPassUpdate = $this->userManagementRepository->passUpdate($request,$id);
+            if ($userPassUpdate) {
+                return ["success"];
+            }
+                return ["failed"];
+        }
+            abort('400','Unauthorized Request');
+    }
 }

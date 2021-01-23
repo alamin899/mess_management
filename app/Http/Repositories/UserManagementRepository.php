@@ -63,6 +63,13 @@ class UserManagementRepository
         else return null;
     }
 
+    public function passUpdate($request,$id)
+    {
+        $user = $this->getUser($id);
+        $user->password = Hash::make($request->password);
+        $user->update();
+        return $user;
+    }
     public function destroy($id)
     {
         return $this->getUser($id)->delete();
