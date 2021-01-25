@@ -3,18 +3,29 @@
 namespace App\Http\Controllers\Api\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Repositories\PaymentHeadRepository;
+use App\Http\Resources\PaymentHeadResource;
 use Illuminate\Http\Request;
 
 class PaymentHeadController extends Controller
 {
+    public function __construct(PaymentHeadRepository $paymentHeadRepository)
+    {
+        $this->paymentHeadRepository = $paymentHeadRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if ($request->ajax())
+        {
+            return PaymentHeadResource::collection($this->paymentHeadRepository->index());
+        }
+        abort(401 , 'Bad request');
     }
 
     /**
