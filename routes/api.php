@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Backend\PaymentHeadController;
 use App\Http\Controllers\Api\Backend\UserManagementController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/** User Crud */
 Route::get('/user',[UserManagementController::class, 'index']);
 Route::post('/user',[UserManagementController::class, 'store']);
 Route::get('/user/{user_id}',[UserManagementController::class, 'show']);
@@ -22,3 +24,6 @@ Route::put('/user/{user_id}',[UserManagementController::class, 'update']);
 Route::delete('/user/{user_id}',[UserManagementController::class, 'destroy']);
 Route::patch('/user/{user_id}',[UserManagementController::class, 'restore']);
 Route::put('/user/{user_id}/pass-update',[UserManagementController::class, 'passUpdate']);
+
+/** Payment Head Crud */
+Route::get('/user',[PaymentHeadController::class, 'index']);
