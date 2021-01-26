@@ -2368,6 +2368,66 @@ __webpack_require__.r(__webpack_exports__);
         _this2.pagination = response.data.meta;
         _this2.isLoading = false;
       });
+    },
+    paymentHeadDestroy: function paymentHeadDestroy(id) {
+      Swal.fire({
+        title: 'Are you sure?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then(function (result) {
+        if (result.value) {
+          axios["delete"]('/api/payment-head/' + id).then(function (response) {
+            if (response.data == true) {
+              Event.$emit('paymentHeadEvent');
+              toast.fire({
+                icon: 'success',
+                title: 'Payment Head deleted successfully'
+              });
+            } else toast.fire({
+              icon: 'error',
+              title: 'Something Went Wrong'
+            });
+          })["catch"](function (error) {
+            toast.fire({
+              icon: 'error',
+              title: error
+            });
+          });
+        }
+      });
+    },
+    paymentHeadRestore: function paymentHeadRestore(id) {
+      Swal.fire({
+        title: 'Are you sure?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, Restore it!'
+      }).then(function (result) {
+        if (result.value) {
+          axios.patch('/api/payment-head/' + id).then(function (response) {
+            if (response.data == true) {
+              Event.$emit('paymentHeadEvent');
+              toast.fire({
+                icon: 'success',
+                title: 'Payment Head Restored successfully'
+              });
+            } else toast.fire({
+              icon: 'error',
+              title: 'Something Went Wrong'
+            });
+          })["catch"](function (error) {
+            toast.fire({
+              icon: 'error',
+              title: error
+            });
+          });
+        }
+      });
     }
   }
 });
@@ -48493,12 +48553,58 @@ var render = function() {
                                 ]
                               ),
                               _vm._v(" "),
-                              _vm._m(1, true)
+                              _c(
+                                "a",
+                                {
+                                  on: {
+                                    click: function($event) {
+                                      $event.preventDefault()
+                                      return _vm.paymentHeadDestroy(
+                                        paymentHead.id
+                                      )
+                                    }
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "span",
+                                    {
+                                      staticClass: "material-icons",
+                                      staticStyle: { color: "red" },
+                                      attrs: { title: "delete" }
+                                    },
+                                    [_vm._v("delete")]
+                                  )
+                                ]
+                              )
                             ],
                             1
                           )
                         : _c("td", { staticClass: "text-center" }, [
-                            _vm._m(2, true)
+                            _c(
+                              "a",
+                              {
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    return _vm.paymentHeadRestore(
+                                      paymentHead.id
+                                    )
+                                  }
+                                }
+                              },
+                              [
+                                _c(
+                                  "span",
+                                  {
+                                    staticClass: "material-icons",
+                                    staticStyle: { color: "green" },
+                                    attrs: { title: "restore" }
+                                  },
+                                  [_vm._v("undo")]
+                                )
+                              ]
+                            )
                           ])
                     ])
                   }),
@@ -48547,38 +48653,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { staticClass: "text-center" }, [_vm._v("Action")])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", [
-      _c(
-        "span",
-        {
-          staticClass: "material-icons",
-          staticStyle: { color: "red" },
-          attrs: { title: "delete" }
-        },
-        [_vm._v("delete")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", [
-      _c(
-        "span",
-        {
-          staticClass: "material-icons",
-          staticStyle: { color: "green" },
-          attrs: { title: "restore" }
-        },
-        [_vm._v("undo")]
-      )
     ])
   }
 ]
