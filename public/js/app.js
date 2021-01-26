@@ -2085,8 +2085,55 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "create"
+  name: "create",
+  data: function data() {
+    return {
+      form: new Form({
+        name: '',
+        status: 1
+      })
+    };
+  }
 });
 
 /***/ }),
@@ -47789,14 +47836,176 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "container" }, [
+    _c("br"),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-12 col-sm-12" }, [
+        _c("div", { staticClass: "card" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "form",
+            {
+              attrs: { role: "form" },
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                }
+              }
+            },
+            [
+              _c("div", { staticClass: "card-body" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c(
+                      "div",
+                      { staticClass: "form-group" },
+                      [
+                        _c("label", { attrs: { for: "headName" } }, [
+                          _vm._v("Head Name")
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.name,
+                              expression: "form.name"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          class: { "is-invalid": _vm.form.errors.has("name") },
+                          attrs: {
+                            type: "text",
+                            id: "headName",
+                            placeholder: "Enter Head Name"
+                          },
+                          domProps: { value: _vm.form.name },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(_vm.form, "name", $event.target.value)
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("has-error", {
+                          attrs: { form: _vm.form, field: "name" }
+                        })
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "form-group",
+                        class: { "is-invalid": _vm.form.errors.has("status") }
+                      },
+                      [
+                        _c("label", { attrs: { for: "status" } }, [
+                          _vm._v("Status")
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.status,
+                                expression: "form.status"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: { id: "status" },
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.form,
+                                  "status",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              }
+                            }
+                          },
+                          [
+                            _c("option", { attrs: { value: "1" } }, [
+                              _vm._v("Active")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "0" } }, [
+                              _vm._v("Deactive")
+                            ])
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("has-error", {
+                          attrs: { form: _vm.form, field: "status" }
+                        })
+                      ],
+                      1
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "card-footer" },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: { to: "payment-head" }
+                    },
+                    [_vm._v("Back")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-success",
+                      attrs: { type: "submit", disabled: _vm.form.busy }
+                    },
+                    [_vm._v("Submit")]
+                  )
+                ],
+                1
+              )
+            ]
+          )
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [_c("h1", [_vm._v("Payment Head Create Page")])])
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h3", { staticClass: "card-title" }, [_vm._v("Payment Head Create")])
+    ])
   }
 ]
 render._withStripped = true
@@ -47851,13 +48060,13 @@ var render = function() {
             "div",
             { staticClass: "card-header" },
             [
-              _c("h3", { staticClass: "card-title" }, [_vm._v("User")]),
+              _c("h3", { staticClass: "card-title" }, [_vm._v("Payment Head")]),
               _vm._v(" "),
               _c(
                 "router-link",
                 {
                   staticClass: "btn btn-primary float-right",
-                  attrs: { to: _vm.payment - _vm.head - _vm.create }
+                  attrs: { to: "payment-head-create" }
                 },
                 [_vm._v("Add Payment Head")]
               )

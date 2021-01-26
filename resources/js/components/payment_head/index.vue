@@ -12,8 +12,8 @@
             <div class="col-md-12 col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">User</h3>
-                        <router-link :to="payment-head-create" class="btn btn-primary float-right">Add Payment Head</router-link>
+                        <h3 class="card-title">Payment Head</h3>
+                        <router-link to="payment-head-create" class="btn btn-primary float-right">Add Payment Head</router-link>
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered table-responsive-md table-responsive-sm">
