@@ -13,7 +13,8 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Payment Head</h3>
-                        <router-link to="payment-head-create" class="btn btn-primary float-right">Add Payment Head</router-link>
+                        <router-link to="payment-head-create" class="btn btn-primary float-right">Add Payment Head
+                        </router-link>
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered table-responsive-md table-responsive-sm">
@@ -29,7 +30,8 @@
                             <tr v-for="(paymentHead,index) in getPaymentHeadData">
                                 <td>{{pagination.from+index}}</td>
                                 <td>{{paymentHead.name}}</td>
-                                <td>{{(paymentHead.status == 1)? "Active":"Deactive"}}</td>
+                                <td v-if="paymentHead.status == 1" class="text-center"><button type="button" disabled class="btn btn-outline-success">Active</button></td>
+                                <td v-else class="text-center"><button type="button" disabled class="btn btn-outline-danger">Deactivate</button></td>
                                 <td class="text-center" v-if="paymentHead.deleted_at == null">
                                     <a v-if="paymentHead.status==1"><span class="material-icons" style="color: green"
                                                                           title="deactive">toggle_on</span></a>
