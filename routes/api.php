@@ -32,3 +32,4 @@ Route::get('/payment-head/{payment_head_id}',[PaymentHeadController::class, 'sho
 Route::put('/payment-head/{payment_head_id}',[PaymentHeadController::class, 'update']);
 Route::delete('/payment-head/{payment_head_id}',[PaymentHeadController::class, 'destroy']);
 Route::patch('/payment-head/{payment_head_id}',[PaymentHeadController::class, 'restore']);
+Route::get('/payment-head/{payment_head_id}/status/{status_id}',[PaymentHeadController::class, 'status']);

@@ -47,6 +47,25 @@ class PaymentHeadRepository
         return $this->getPaymentHead($id , true)->restore();
     }
 
+    public function status($id, $status)
+    {
+        $paymentHead = $this->getPaymentHead($id , true);
+        $paymentHead->status = $status;
+        $paymentHead->update();
+        if ($paymentHead->status == 1)
+        {
+            return "active";
+        }
+        elseif ($paymentHead->status == 0)
+        {
+            return "deactive";
+        }
+        else
+        {
+            return $paymentHead;
+        }
+    }
+
     public function getPaymentHeads($name = '' , $status = '' , $withTrashed = false)
     {
         ($withTrashed)?$paymentHeads = PaymentHead::withTrashed()->latest() : $paymentHeads = PaymentHead::query()->latest() ;
