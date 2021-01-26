@@ -13,6 +13,7 @@ Vue.component('user-password-change', require('./components/user/password_change
 // Payment Head
 Vue.component('payment-head-index', require('./components/payment_head/index.vue').default);
 Vue.component('payment-head-create', require('./components/payment_head/create.vue').default);
+Vue.component('payment-head-edit', require('./components/payment_head/edit.vue').default);
 
 
 // pagination

@@ -23,6 +23,11 @@ class PaymentHeadRepository
         ]);
     }
 
+    public function show($id)
+    {
+        return $this->getPaymentHead($id);
+    }
+
     public function getPaymentHeads($name = '' , $status = '' , $withTrashed = false)
     {
         ($withTrashed)?$paymentHeads = PaymentHead::withTrashed()->latest() : $paymentHeads = PaymentHead::query()->latest() ;
@@ -33,5 +38,17 @@ class PaymentHeadRepository
             $paymentHeads->where('status', $status);
         });
         return $paymentHeads;
+    }
+
+    public function getPaymentHead($id , $withTrashed = false)
+    {
+        if ($withTrashed)
+        {
+            $paymentHead = PaymentHead::withTrashed()->find($id);
+        }
+        else{
+            $paymentHead = PaymentHead::find($id);
+        }
+        return $paymentHead;
     }
 }
