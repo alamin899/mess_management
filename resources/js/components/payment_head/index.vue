@@ -34,10 +34,10 @@
                                 <td v-else class="text-center"><button type="button" @click.prevent="paymentHeadStatus(paymentHead.id , 1 ,'Active')" class="btn btn-outline-danger">Deactivate</button></td>
                                 <td class="text-center" v-if="paymentHead.deleted_at == null">
                                     <router-link :to="`payment-head/${paymentHead.id}`"><span class="material-icons"  title="edit">edit</span></router-link>
-                                    <a @click.prevent="paymentHeadDestroy(paymentHead.id)"><span class="material-icons" style="color: red;" title="delete">delete</span></a>
+                                    <a href="#" @click.prevent="paymentHeadDestroy(paymentHead.id)"><span class="material-icons" style="color: red;" title="delete">delete</span></a>
                                 </td>
                                 <td class="text-center" v-else>
-                                    <a @click.prevent="paymentHeadRestore(paymentHead.id)"><span class="material-icons" title="restore" style="color: green">undo</span></a>
+                                    <a href="#" @click.prevent="paymentHeadRestore(paymentHead.id)"><span class="material-icons" title="restore" style="color: green">undo</span></a>
                                 </td>
                             </tr>
                             </tbody>

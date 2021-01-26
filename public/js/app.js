@@ -47924,6 +47924,7 @@ var render = function() {
                     {
                       staticClass: "page-link",
                       class: { disabled: _vm.pagination.current_page <= 1 },
+                      attrs: { href: "#" },
                       on: {
                         click: function($event) {
                           $event.preventDefault()
@@ -47941,6 +47942,7 @@ var render = function() {
                     {
                       staticClass: "page-link",
                       class: { disabled: _vm.pagination.current_page <= 1 },
+                      attrs: { href: "#" },
                       on: {
                         click: function($event) {
                           $event.preventDefault()
@@ -47965,6 +47967,7 @@ var render = function() {
                         {
                           key: page,
                           staticClass: "page-link",
+                          attrs: { href: "#" },
                           on: {
                             click: function($event) {
                               $event.preventDefault()
@@ -47993,6 +47996,7 @@ var render = function() {
                           _vm.pagination.current_page >=
                           _vm.pagination.last_page
                       },
+                      attrs: { href: "#" },
                       on: {
                         click: function($event) {
                           $event.preventDefault()
@@ -48014,6 +48018,7 @@ var render = function() {
                           _vm.pagination.current_page >=
                           _vm.pagination.last_page
                       },
+                      attrs: { href: "#" },
                       on: {
                         click: function($event) {
                           $event.preventDefault()
@@ -48577,6 +48582,7 @@ var render = function() {
                               _c(
                                 "a",
                                 {
+                                  attrs: { href: "#" },
                                   on: {
                                     click: function($event) {
                                       $event.preventDefault()
@@ -48605,6 +48611,7 @@ var render = function() {
                             _c(
                               "a",
                               {
+                                attrs: { href: "#" },
                                 on: {
                                   click: function($event) {
                                     $event.preventDefault()
@@ -49461,6 +49468,7 @@ var render = function() {
                               _c(
                                 "a",
                                 {
+                                  attrs: { href: "#" },
                                   on: {
                                     click: function($event) {
                                       $event.preventDefault()
@@ -49507,6 +49515,7 @@ var render = function() {
                             _c(
                               "a",
                               {
+                                attrs: { href: "#" },
                                 on: {
                                   click: function($event) {
                                     $event.preventDefault()
