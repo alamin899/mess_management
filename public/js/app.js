@@ -2238,6 +2238,27 @@ __webpack_require__.r(__webpack_exports__);
         _this.form.name = response.data.data.name;
         _this.form.status = response.data.data.status;
       });
+    },
+    update: function update() {
+      var _this2 = this;
+
+      this.form.put('/api/payment-head/' + this.$route.params.payment_head_id).then(function (response) {
+        if (response.data.message == "success") {
+          _this2.$router.push('/payment-head');
+
+          _this2.form.reset();
+
+          toast.fire({
+            icon: 'success',
+            title: 'Payment Head Updated successfully'
+          });
+        } else {
+          toast.fire({
+            icon: 'error',
+            title: 'Failed To Insert '
+          });
+        }
+      });
     }
   }
 });
@@ -48153,6 +48174,7 @@ var render = function() {
               on: {
                 submit: function($event) {
                   $event.preventDefault()
+                  return _vm.update($event)
                 },
                 keydown: function($event) {
                   return _vm.form.onKeydown($event)
@@ -49220,7 +49242,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header" }, [
-      _c("h3", { staticClass: "card-title" }, [_vm._v("User Create")])
+      _c("h3", { staticClass: "card-title" }, [_vm._v("User Edit")])
     ])
   }
 ]

@@ -28,6 +28,15 @@ class PaymentHeadRepository
         return $this->getPaymentHead($id);
     }
 
+    public function update($id , $request)
+    {
+        $user = $this->getPaymentHead($id);
+        $user->name = $request->name;
+        $user->status = $request->status;
+        $user->update();
+        return $user;
+    }
+
     public function getPaymentHeads($name = '' , $status = '' , $withTrashed = false)
     {
         ($withTrashed)?$paymentHeads = PaymentHead::withTrashed()->latest() : $paymentHeads = PaymentHead::query()->latest() ;
