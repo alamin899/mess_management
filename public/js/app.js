@@ -2085,8 +2085,96 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "index"
+  name: "index",
+  data: function data() {
+    return {
+      isLoading: false,
+      fullPage: true,
+      isSearch: '',
+      getPaymentHeadData: '',
+      pagination: {
+        current_page: 1
+      }
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    this.isLoading = true;
+    this.paymentHeads();
+    Event.$on('paymentHeadEvent', function () {
+      _this.paymentHeads();
+    });
+  },
+  methods: {
+    paymentHeads: function paymentHeads() {
+      var _this2 = this;
+
+      axios.get('/api/payment-head?page=' + this.pagination.current_page).then(function (response) {
+        _this2.getPaymentHeadData = response.data.data;
+        _this2.pagination = response.data.meta;
+        _this2.isLoading = false;
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -47682,14 +47770,202 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "container" }, [
+    _c("br"),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "vld-parent" },
+      [
+        _c("Loading", {
+          attrs: {
+            active: _vm.isLoading,
+            "can-cancel": true,
+            loader: _vm.bars,
+            "is-full-page": _vm.fullPage
+          },
+          on: {
+            "update:active": function($event) {
+              _vm.isLoading = $event
+            }
+          }
+        })
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-12 col-sm-12" }, [
+        _c("div", { staticClass: "card" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _c(
+              "table",
+              {
+                staticClass:
+                  "table table-bordered table-responsive-md table-responsive-sm"
+              },
+              [
+                _vm._m(1),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  _vm._l(_vm.getPaymentHeadData, function(paymentHead, index) {
+                    return _c("tr", [
+                      _c("td", [_vm._v(_vm._s(_vm.pagination.from + index))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(paymentHead.name))]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _vm._v(
+                          _vm._s(
+                            paymentHead.status == 1 ? "Active" : "Deactive"
+                          )
+                        )
+                      ]),
+                      _vm._v(" "),
+                      paymentHead.deleted_at == null
+                        ? _c("td", { staticClass: "text-center" }, [
+                            paymentHead.status == 1
+                              ? _c("a", [
+                                  _c(
+                                    "span",
+                                    {
+                                      staticClass: "material-icons",
+                                      staticStyle: { color: "green" },
+                                      attrs: { title: "deactive" }
+                                    },
+                                    [_vm._v("toggle_on")]
+                                  )
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            paymentHead.status == 0
+                              ? _c("a", [
+                                  _c(
+                                    "span",
+                                    {
+                                      staticClass: "material-icons",
+                                      staticStyle: { color: "red" },
+                                      attrs: { title: "active" }
+                                    },
+                                    [_vm._v("toggle_off")]
+                                  )
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm._m(2, true),
+                            _vm._v(" "),
+                            _vm._m(3, true)
+                          ])
+                        : _c("td", { staticClass: "text-center" }, [
+                            _vm._m(4, true)
+                          ])
+                    ])
+                  }),
+                  0
+                )
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "card-footer" },
+            [
+              _c("pagination", {
+                attrs: {
+                  pagination: this.pagination,
+                  offset: 5,
+                  "is-search": _vm.isSearch
+                },
+                on: { paginate: _vm.paymentHeads }
+              })
+            ],
+            1
+          )
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [_c("h1", [_vm._v("payment head index")])])
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h3", { staticClass: "card-title" }, [_vm._v("User")]),
+      _vm._v(" "),
+      _c(
+        "a",
+        { staticClass: "btn btn-primary float-right", attrs: { href: "#" } },
+        [_vm._v("Add Payment Head")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c(
+          "th",
+          { staticClass: "text-center", staticStyle: { width: "10px" } },
+          [_vm._v("#SL")]
+        ),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Name")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Status")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Action")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { attrs: { href: "#" } }, [
+      _c("span", { staticClass: "material-icons", attrs: { title: "edit" } }, [
+        _vm._v("edit")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", [
+      _c(
+        "span",
+        {
+          staticClass: "material-icons",
+          staticStyle: { color: "red" },
+          attrs: { title: "delete" }
+        },
+        [_vm._v("delete")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", [
+      _c(
+        "span",
+        {
+          staticClass: "material-icons",
+          staticStyle: { color: "green" },
+          attrs: { title: "restore" }
+        },
+        [_vm._v("undo")]
+      )
+    ])
   }
 ]
 render._withStripped = true

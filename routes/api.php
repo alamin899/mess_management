@@ -26,4 +26,4 @@ Route::patch('/user/{user_id}',[UserManagementController::class, 'restore']);
 Route::put('/user/{user_id}/pass-update',[UserManagementController::class, 'passUpdate']);
 
 /** Payment Head Crud */
-Route::get('/user',[PaymentHeadController::class, 'index']);
+Route::get('/payment-head',[PaymentHeadController::class, 'index']);
