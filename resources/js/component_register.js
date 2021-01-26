@@ -10,6 +10,9 @@ Vue.component('user-create', require('./components/user/create.vue').default);
 Vue.component('user-edit', require('./components/user/edit.vue').default);
 Vue.component('user-password-change', require('./components/user/password_change.vue').default);
 
+// Payment Head
+Vue.component('payment-head-index', require('./components/payment_head/index.vue').default);
+
 
 // pagination
 Vue.component('pagination', require('./components/custome/pagination').default);
