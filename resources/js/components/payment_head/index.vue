@@ -13,7 +13,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">User</h3>
-                        <a href="#" class="btn btn-primary float-right">Add Payment Head</a>
+                        <router-link :to="payment-head-create" class="btn btn-primary float-right">Add Payment Head</router-link>
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered table-responsive-md table-responsive-sm">

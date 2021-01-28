@@ -5,6 +5,7 @@ import userCreate from './components/user/create'
 import userEdit from './components/user/edit'
 import userPassUpdate from './components/user/password_change'
 import paymentHeadIndex from './components/payment_head/index'
+import paymentHeadCreate from './components/payment_head/create'
 export const routes = [
     { path: '/admin-dashboard', component: adminDashboard }, //dashboard
     { path: '/admin-master', component: adminMaster },
@@ -18,4 +19,5 @@ export const routes = [
 
     // Payment Head
     { path: '/payment-head', component: paymentHeadIndex },
+    { path: '/payment-head-create', component: paymentHeadCreate },
 ]
