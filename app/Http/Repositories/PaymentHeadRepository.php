@@ -37,6 +37,16 @@ class PaymentHeadRepository
         return $user;
     }
 
+    public function destroy($id)
+    {
+        return $this->getPaymentHead($id)->delete();
+    }
+
+    public function restore($id)
+    {
+        return $this->getPaymentHead($id , true)->restore();
+    }
+
     public function getPaymentHeads($name = '' , $status = '' , $withTrashed = false)
     {
         ($withTrashed)?$paymentHeads = PaymentHead::withTrashed()->latest() : $paymentHeads = PaymentHead::query()->latest() ;

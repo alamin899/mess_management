@@ -38,10 +38,10 @@
                                     <a v-if="paymentHead.status==0"><span class="material-icons" style="color: red"
                                                                           title="active">toggle_off</span></a>
                                     <router-link :to="`payment-head/${paymentHead.id}`"><span class="material-icons"  title="edit">edit</span></router-link>
-                                    <a><span class="material-icons" style="color: red;" title="delete">delete</span></a>
+                                    <a @click.prevent="paymentHeadDestroy(paymentHead.id)"><span class="material-icons" style="color: red;" title="delete">delete</span></a>
                                 </td>
                                 <td class="text-center" v-else>
-                                    <a><span class="material-icons" title="restore" style="color: green">undo</span></a>
+                                    <a @click.prevent="paymentHeadRestore(paymentHead.id)"><span class="material-icons" title="restore" style="color: green">undo</span></a>
                                 </td>
                             </tr>
                             </tbody>
@@ -90,6 +90,78 @@
                         this.pagination = response.data.meta
                         this.isLoading = false
                     })
+            },
+            paymentHeadDestroy(id)
+            {
+                Swal.fire({
+                    title: 'Are you sure?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.value) {
+                        axios.delete('/api/payment-head/'+id)
+                            .then((response) => {
+                                if (response.data == true)
+                                {
+                                    Event.$emit('paymentHeadEvent')
+                                    toast.fire({
+                                        icon: 'success',
+                                        title: 'Payment Head deleted successfully'
+                                    })
+                                }
+                                else
+                                    toast.fire({
+                                        icon: 'error',
+                                        title: 'Something Went Wrong'
+                                    })
+                            })
+                            .catch((error)=>{
+                                toast.fire({
+                                    icon: 'error',
+                                    title: error
+                                })
+                            })
+                    }
+                })
+            },
+            paymentHeadRestore(id)
+            {
+                Swal.fire({
+                    title: 'Are you sure?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, Restore it!'
+                }).then((result) => {
+                    if (result.value) {
+                        axios.patch('/api/payment-head/'+id)
+                            .then((response) => {
+                                if (response.data == true)
+                                {
+                                    Event.$emit('paymentHeadEvent')
+                                    toast.fire({
+                                        icon: 'success',
+                                        title: 'Payment Head Restored successfully'
+                                    })
+                                }
+                                else
+                                    toast.fire({
+                                        icon: 'error',
+                                        title: 'Something Went Wrong'
+                                    })
+                            })
+                            .catch((error)=>{
+                                toast.fire({
+                                    icon: 'error',
+                                    title: error
+                                })
+                            })
+                    }
+                })
             },
         }
     }

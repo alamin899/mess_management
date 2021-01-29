@@ -30,3 +30,5 @@ Route::get('/payment-head',[PaymentHeadController::class, 'index']);
 Route::post('/payment-head',[PaymentHeadController::class, 'store']);
 Route::get('/payment-head/{payment_head_id}',[PaymentHeadController::class, 'show']);
 Route::put('/payment-head/{payment_head_id}',[PaymentHeadController::class, 'update']);
+Route::delete('/payment-head/{payment_head_id}',[PaymentHeadController::class, 'destroy']);
+Route::patch('/payment-head/{payment_head_id}',[PaymentHeadController::class, 'restore']);
