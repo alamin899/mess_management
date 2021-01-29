@@ -92,9 +92,20 @@ class PaymentHeadController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PaymentHeadRequest $paymentHeadRequest, $id)
     {
-        //
+        if ($this->paymentHeadRepository->update($id , $paymentHeadRequest))
+        {
+            return response()->json([
+                'message' => "success"
+            ],200);
+        }
+        else
+        {
+            return response()->json([
+                'message' => "failed"
+            ]);
+        }
     }
 
     /**

@@ -7,7 +7,7 @@
                     <div class="card-header">
                         <h3 class="card-title">Payment Head Edit</h3>
                     </div>
-                    <form role="form" @submit.prevent="" @keydown="form.onKeydown($event)">
+                    <form role="form" @submit.prevent="update" @keydown="form.onKeydown($event)">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-6">
@@ -66,6 +66,25 @@
                         this.form.status = response.data.data.status
                     })
             },
+            update(){
+                this.form.put('/api/payment-head/'+this.$route.params.payment_head_id)
+                    .then((response)=>{
+                        if (response.data.message == "success"){
+                            this.$router.push('/payment-head')
+                            this.form.reset()
+                            toast.fire({
+                                icon: 'success',
+                                title: 'Payment Head Updated successfully'
+                            })
+                        }
+                        else {
+                            toast.fire({
+                                icon: 'error',
+                                title: 'Failed To Insert '
+                            })
+                        }
+                    })
+            }
 
         }
     }

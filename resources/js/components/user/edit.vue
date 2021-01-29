@@ -5,7 +5,7 @@
             <div class="col-md-12 col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">User Create</h3>
+                        <h3 class="card-title">User Edit</h3>
                     </div>
                     <!-- /.card-header -->
                     <form role="form" @submit.prevent="update" @keydown="form.onKeydown($event)">
