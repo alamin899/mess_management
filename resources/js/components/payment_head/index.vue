@@ -37,7 +37,7 @@
                                                                           title="deactive">toggle_on</span></a>
                                     <a v-if="paymentHead.status==0"><span class="material-icons" style="color: red"
                                                                           title="active">toggle_off</span></a>
-                                    <a href="#"><span class="material-icons" title="edit">edit</span></a>
+                                    <router-link :to="`payment-head/${paymentHead.id}`"><span class="material-icons"  title="edit">edit</span></router-link>
                                     <a><span class="material-icons" style="color: red;" title="delete">delete</span></a>
                                 </td>
                                 <td class="text-center" v-else>

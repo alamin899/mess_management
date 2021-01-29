@@ -96,12 +96,12 @@ class UserManagementRepository
     {
         if ($withTrashed)
         {
-            $userDestroy = User::withTrashed()->find($id);
+            $user = User::withTrashed()->find($id);
         }
         else{
-            $userDestroy = User::find($id);
+            $user = User::find($id);
         }
-        return $userDestroy;
+        return $user;
     }
 
 }

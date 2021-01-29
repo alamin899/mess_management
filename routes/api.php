@@ -28,3 +28,4 @@ Route::put('/user/{user_id}/pass-update',[UserManagementController::class, 'pass
 /** Payment Head Crud */
 Route::get('/payment-head',[PaymentHeadController::class, 'index']);
 Route::post('/payment-head',[PaymentHeadController::class, 'store']);
+Route::get('/payment-head/{payment_head_id}',[PaymentHeadController::class, 'show']);
