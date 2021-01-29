@@ -7,8 +7,7 @@
                     <div class="card-header">
                         <h3 class="card-title">Payment Head Create</h3>
                     </div>
-                    <!-- /.card-header -->
-                    <form role="form" @submit.prevent="" >
+                    <form role="form" @submit.prevent="paymentHeadStore">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-6">
@@ -54,6 +53,33 @@
                 )
             }
         },
+        methods:{
+            paymentHeadStore(){
+                this.form.post('/api/payment-head')
+                    .then((response)=>{
+                        if (response.data.message == "success"){
+                            this.$router.push('/payment-head')
+                            this.form.reset()
+                            toast.fire({
+                                icon: 'success',
+                                title: 'Payment head Created successfully'
+                            })
+                        }
+                        else {
+                            toast.fire({
+                                icon: 'error',
+                                title: 'Failed To Insert '
+                            })
+                        }
+                    })
+                .catch((error)=>{
+                    toast.fire({
+                        icon: 'error',
+                        title: error
+                    })
+                })
+            }
+        }
     }
 </script>
 

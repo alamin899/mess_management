@@ -2123,7 +2123,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "create",
   data: function data() {
@@ -2133,6 +2132,34 @@ __webpack_require__.r(__webpack_exports__);
         status: 1
       })
     };
+  },
+  methods: {
+    paymentHeadStore: function paymentHeadStore() {
+      var _this = this;
+
+      this.form.post('/api/payment-head').then(function (response) {
+        if (response.data.message == "success") {
+          _this.$router.push('/payment-head');
+
+          _this.form.reset();
+
+          toast.fire({
+            icon: 'success',
+            title: 'Payment head Created successfully'
+          });
+        } else {
+          toast.fire({
+            icon: 'error',
+            title: 'Failed To Insert '
+          });
+        }
+      })["catch"](function (error) {
+        toast.fire({
+          icon: 'error',
+          title: error
+        });
+      });
+    }
   }
 });
 
@@ -2147,6 +2174,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -47851,6 +47880,7 @@ var render = function() {
               on: {
                 submit: function($event) {
                   $event.preventDefault()
+                  return _vm.paymentHeadStore($event)
                 }
               }
             },
@@ -48068,7 +48098,7 @@ var render = function() {
                   staticClass: "btn btn-primary float-right",
                   attrs: { to: "payment-head-create" }
                 },
-                [_vm._v("Add Payment Head")]
+                [_vm._v("Add Payment Head\n                    ")]
               )
             ],
             1
@@ -48092,13 +48122,27 @@ var render = function() {
                       _vm._v(" "),
                       _c("td", [_vm._v(_vm._s(paymentHead.name))]),
                       _vm._v(" "),
-                      _c("td", [
-                        _vm._v(
-                          _vm._s(
-                            paymentHead.status == 1 ? "Active" : "Deactive"
-                          )
-                        )
-                      ]),
+                      paymentHead.status == 1
+                        ? _c("td", { staticClass: "text-center" }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-outline-success",
+                                attrs: { type: "button", disabled: "" }
+                              },
+                              [_vm._v("Active")]
+                            )
+                          ])
+                        : _c("td", { staticClass: "text-center" }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-outline-danger",
+                                attrs: { type: "button", disabled: "" }
+                              },
+                              [_vm._v("Deactivate")]
+                            )
+                          ]),
                       _vm._v(" "),
                       paymentHead.deleted_at == null
                         ? _c("td", { staticClass: "text-center" }, [

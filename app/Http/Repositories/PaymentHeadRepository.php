@@ -14,6 +14,15 @@ class PaymentHeadRepository
         return $this->getPaymentHeads('','',true)->paginate(config('constant.PAGINATE'));
     }
 
+    public function store($request)
+    {
+        return PaymentHead::firstOrCreate([
+            'name' => $request->name,
+        ],[
+            'status' => $request->status
+        ]);
+    }
+
     public function getPaymentHeads($name = '' , $status = '' , $withTrashed = false)
     {
         ($withTrashed)?$paymentHeads = PaymentHead::withTrashed()->latest() : $paymentHeads = PaymentHead::query()->latest() ;
