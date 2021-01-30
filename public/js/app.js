@@ -2333,10 +2333,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "index",
   data: function data() {
@@ -2420,6 +2416,39 @@ __webpack_require__.r(__webpack_exports__);
               icon: 'error',
               title: 'Something Went Wrong'
             });
+          })["catch"](function (error) {
+            toast.fire({
+              icon: 'error',
+              title: error
+            });
+          });
+        }
+      });
+    },
+    paymentHeadStatus: function paymentHeadStatus(payment_head_id, status_id, name) {
+      Swal.fire({
+        title: 'Are you sure ?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, ' + name + '!'
+      }).then(function (result) {
+        if (result.value) {
+          axios.get('/api/payment-head/' + payment_head_id + '/status/' + status_id).then(function (response) {
+            if (response.data == "active") {
+              Event.$emit('paymentHeadEvent');
+              toast.fire({
+                icon: 'success',
+                title: 'Payment Head Activate'
+              });
+            } else {
+              Event.$emit('paymentHeadEvent');
+              toast.fire({
+                icon: 'success',
+                title: 'Payment Head Deactivate'
+              });
+            }
           })["catch"](function (error) {
             toast.fire({
               icon: 'error',
@@ -47895,6 +47924,7 @@ var render = function() {
                     {
                       staticClass: "page-link",
                       class: { disabled: _vm.pagination.current_page <= 1 },
+                      attrs: { href: "#" },
                       on: {
                         click: function($event) {
                           $event.preventDefault()
@@ -47912,6 +47942,7 @@ var render = function() {
                     {
                       staticClass: "page-link",
                       class: { disabled: _vm.pagination.current_page <= 1 },
+                      attrs: { href: "#" },
                       on: {
                         click: function($event) {
                           $event.preventDefault()
@@ -47936,6 +47967,7 @@ var render = function() {
                         {
                           key: page,
                           staticClass: "page-link",
+                          attrs: { href: "#" },
                           on: {
                             click: function($event) {
                               $event.preventDefault()
@@ -47964,6 +47996,7 @@ var render = function() {
                           _vm.pagination.current_page >=
                           _vm.pagination.last_page
                       },
+                      attrs: { href: "#" },
                       on: {
                         click: function($event) {
                           $event.preventDefault()
@@ -47985,6 +48018,7 @@ var render = function() {
                           _vm.pagination.current_page >=
                           _vm.pagination.last_page
                       },
+                      attrs: { href: "#" },
                       on: {
                         click: function($event) {
                           $event.preventDefault()
@@ -48485,7 +48519,17 @@ var render = function() {
                               "button",
                               {
                                 staticClass: "btn btn-outline-success",
-                                attrs: { type: "button", disabled: "" }
+                                attrs: { type: "button" },
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    return _vm.paymentHeadStatus(
+                                      paymentHead.id,
+                                      0,
+                                      "Deactive"
+                                    )
+                                  }
+                                }
                               },
                               [_vm._v("Active")]
                             )
@@ -48495,7 +48539,17 @@ var render = function() {
                               "button",
                               {
                                 staticClass: "btn btn-outline-danger",
-                                attrs: { type: "button", disabled: "" }
+                                attrs: { type: "button" },
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    return _vm.paymentHeadStatus(
+                                      paymentHead.id,
+                                      1,
+                                      "Active"
+                                    )
+                                  }
+                                }
                               },
                               [_vm._v("Deactivate")]
                             )
@@ -48506,34 +48560,6 @@ var render = function() {
                             "td",
                             { staticClass: "text-center" },
                             [
-                              paymentHead.status == 1
-                                ? _c("a", [
-                                    _c(
-                                      "span",
-                                      {
-                                        staticClass: "material-icons",
-                                        staticStyle: { color: "green" },
-                                        attrs: { title: "deactive" }
-                                      },
-                                      [_vm._v("toggle_on")]
-                                    )
-                                  ])
-                                : _vm._e(),
-                              _vm._v(" "),
-                              paymentHead.status == 0
-                                ? _c("a", [
-                                    _c(
-                                      "span",
-                                      {
-                                        staticClass: "material-icons",
-                                        staticStyle: { color: "red" },
-                                        attrs: { title: "active" }
-                                      },
-                                      [_vm._v("toggle_off")]
-                                    )
-                                  ])
-                                : _vm._e(),
-                              _vm._v(" "),
                               _c(
                                 "router-link",
                                 {
@@ -48556,6 +48582,7 @@ var render = function() {
                               _c(
                                 "a",
                                 {
+                                  attrs: { href: "#" },
                                   on: {
                                     click: function($event) {
                                       $event.preventDefault()
@@ -48584,6 +48611,7 @@ var render = function() {
                             _c(
                               "a",
                               {
+                                attrs: { href: "#" },
                                 on: {
                                   click: function($event) {
                                     $event.preventDefault()
@@ -49440,6 +49468,7 @@ var render = function() {
                               _c(
                                 "a",
                                 {
+                                  attrs: { href: "#" },
                                   on: {
                                     click: function($event) {
                                       $event.preventDefault()
@@ -49486,6 +49515,7 @@ var render = function() {
                             _c(
                               "a",
                               {
+                                attrs: { href: "#" },
                                 on: {
                                   click: function($event) {
                                     $event.preventDefault()

@@ -80,4 +80,9 @@ class PaymentHeadController extends Controller
         }
         abort('401',"Bad Request");
     }
+
+    public function status($id, $status)
+    {
+        return $this->paymentHeadRepository->status($id, $status);
+    }
 }

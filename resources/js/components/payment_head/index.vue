@@ -30,18 +30,14 @@
                             <tr v-for="(paymentHead,index) in getPaymentHeadData">
                                 <td>{{pagination.from+index}}</td>
                                 <td>{{paymentHead.name}}</td>
-                                <td v-if="paymentHead.status == 1" class="text-center"><button type="button" disabled class="btn btn-outline-success">Active</button></td>
-                                <td v-else class="text-center"><button type="button" disabled class="btn btn-outline-danger">Deactivate</button></td>
+                                <td v-if="paymentHead.status == 1" class="text-center"><button type="button" @click.prevent="paymentHeadStatus(paymentHead.id , 0 , 'Deactive')" class="btn btn-outline-success">Active</button></td>
+                                <td v-else class="text-center"><button type="button" @click.prevent="paymentHeadStatus(paymentHead.id , 1 ,'Active')" class="btn btn-outline-danger">Deactivate</button></td>
                                 <td class="text-center" v-if="paymentHead.deleted_at == null">
-                                    <a v-if="paymentHead.status==1"><span class="material-icons" style="color: green"
-                                                                          title="deactive">toggle_on</span></a>
-                                    <a v-if="paymentHead.status==0"><span class="material-icons" style="color: red"
-                                                                          title="active">toggle_off</span></a>
                                     <router-link :to="`payment-head/${paymentHead.id}`"><span class="material-icons"  title="edit">edit</span></router-link>
-                                    <a @click.prevent="paymentHeadDestroy(paymentHead.id)"><span class="material-icons" style="color: red;" title="delete">delete</span></a>
+                                    <a href="#" @click.prevent="paymentHeadDestroy(paymentHead.id)"><span class="material-icons" style="color: red;" title="delete">delete</span></a>
                                 </td>
                                 <td class="text-center" v-else>
-                                    <a @click.prevent="paymentHeadRestore(paymentHead.id)"><span class="material-icons" title="restore" style="color: green">undo</span></a>
+                                    <a href="#" @click.prevent="paymentHeadRestore(paymentHead.id)"><span class="material-icons" title="restore" style="color: green">undo</span></a>
                                 </td>
                             </tr>
                             </tbody>
@@ -155,6 +151,44 @@
                                     })
                             })
                             .catch((error)=>{
+                                toast.fire({
+                                    icon: 'error',
+                                    title: error
+                                })
+                            })
+                    }
+                })
+            },
+
+            paymentHeadStatus(payment_head_id, status_id , name) {
+                Swal.fire({
+                    title: 'Are you sure ?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, '+name+'!'
+                }).then((result) => {
+                    if (result.value) {
+                        axios.get('/api/payment-head/' + payment_head_id + '/status/' + status_id)
+                            .then((response) => {
+                                if (response.data == "active") {
+                                    Event.$emit('paymentHeadEvent')
+                                    toast.fire({
+                                        icon: 'success',
+                                        title: 'Payment Head Activate'
+                                    })
+                                }
+                                else {
+                                    Event.$emit('paymentHeadEvent')
+                                    toast.fire({
+                                        icon: 'success',
+                                        title: 'Payment Head Deactivate'
+                                    })
+                                }
+
+                            })
+                            .catch((error) => {
                                 toast.fire({
                                     icon: 'error',
                                     title: error

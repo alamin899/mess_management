@@ -2,13 +2,13 @@
     <div v-if="this.pagination.from >0 && this.pagination.to > 0">
         <nav aria-label="Page navigation" class="float-right">
             <ul class="pagination fullscreen">
-                <li class="page-item"><a class="page-link" :class="{ disabled: pagination.current_page <= 1 }" @click.prevent="changePage(1)">First</a></li>
-                <li class="page-item"><a class="page-link" :class="{ disabled: pagination.current_page <= 1 }" @click.prevent="changePage(pagination.current_page - 1)">Previous</a></li>
-                <li class="page-item" :class="isCurrentPage(page) ? 'active' : ''" v-for="page in pages"><a class="page-link"  :key="page"  @click.prevent="changePage(page)">{{ page }}
+                <li class="page-item"><a  href="#" class="page-link" :class="{ disabled: pagination.current_page <= 1 }" @click.prevent="changePage(1)">First</a></li>
+                <li class="page-item"><a href="#" class="page-link" :class="{ disabled: pagination.current_page <= 1 }" @click.prevent="changePage(pagination.current_page - 1)">Previous</a></li>
+                <li class="page-item" :class="isCurrentPage(page) ? 'active' : ''" v-for="page in pages"><a href="#" class="page-link"  :key="page"  @click.prevent="changePage(page)">{{ page }}
                     <span v-if="isCurrentPage(page)" class="sr-only"></span>
                 </a></li>
-                <li class="page-item"><a class="page-link" :class="{ disabled: pagination.current_page >= pagination.last_page }" @click.prevent="changePage(pagination.current_page + 1)">Next</a></li>
-                <li class="page-item"><a class="page-link" :class="{ disabled: pagination.current_page >= pagination.last_page }" @click.prevent="changePage(pagination.last_page)">Last</a></li>
+                <li class="page-item"><a href="#" class="page-link" :class="{ disabled: pagination.current_page >= pagination.last_page }" @click.prevent="changePage(pagination.current_page + 1)">Next</a></li>
+                <li class="page-item"><a href="#" class="page-link" :class="{ disabled: pagination.current_page >= pagination.last_page }" @click.prevent="changePage(pagination.last_page)">Last</a></li>
             </ul>
         </nav>
     </div>
