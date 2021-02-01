@@ -10,4 +10,14 @@ class PaymentHead extends Model
 {
     use HasFactory ,SoftDeletes;
     protected $guarded = ['id'];
+
+    public function paymentSchedules()
+    {
+        return $this->hasMany(PaymentSchedule::class);
+    }
+
+    public function paymentCollections()
+    {
+        return $this->hasMany(PaymentCollection::class);
+    }
 }
