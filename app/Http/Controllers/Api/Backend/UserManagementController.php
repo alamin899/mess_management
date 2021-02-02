@@ -48,7 +48,7 @@ class UserManagementController extends Controller
      */
     public function store(UserRequest $userRequest)
     {
-        $userStore = $this->userManagementRepository->store($userRequest);
+        $userStore = $this->userManagementRepository->store($this->customRequest($userRequest));
         if ($userStore)
         {
             return response()->json([
@@ -59,6 +59,7 @@ class UserManagementController extends Controller
             'message' => "failed",
         ]);
     }
+
 
     /**
      * Display the specified resource.
@@ -146,5 +147,16 @@ class UserManagementController extends Controller
                 return ["failed"];
         }
             abort('400','Unauthorized Request');
+    }
+
+    protected function customRequest($request)
+    {
+        return new Request([
+            'name' => $request->name,
+            'email' => $request->email,
+            'image' => $request->image,
+            'status' => $request->status['id'],
+            'password' =>$request->password,
+        ]);
     }
 }

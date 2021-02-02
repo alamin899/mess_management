@@ -28,12 +28,13 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="form-group" :class="{ 'is-invalid': form.errors.has('status') }">
+                                    <div class="form-group">
                                         <label>Status</label>
-                                        <select class="form-control" v-model="form.status">
-                                            <option value="1">Active</option>
-                                            <option value="2">Pending</option>
-                                        </select>
+                                        <multiselect v-model="form.status"
+                                                     :options="status"
+                                                     placeholder="Select Status" label="value" track-by="id"
+                                                     :class="{ 'is-invalid': form.errors.has('status') }">
+                                        </multiselect>
                                         <has-error :form="form" field="status"></has-error>
                                     </div>
                                 </div>
@@ -68,12 +69,16 @@
             return {
                 image:'',
                 edit:'',
+                status: [
+                    { id: 1, value: 'Active' },
+                    { id: 2, value: 'Pending' },
+                ],
                 form:new Form(
                     {
                         name:'',
                         email:'',
                         image:'',
-                        status:1,
+                        status:'',
                     }
                 )
             }
@@ -101,9 +106,21 @@
                     .then((response)=>{
                         this.form.name = response.data.data.name
                         this.form.email = response.data.data.email
-                        this.form.status = response.data.data.status
+                        this.selectStatus(response.data.data.status)
                         this.showImage(response.data.data.image)
                     })
+            },
+            selectStatus(id)
+            {
+                for(var i =0 ;i<this.status.length;i++) {
+                    if (this.status[i].id == id) {
+                        this.form.status ={
+                            id: id,
+                            value: this.status[i].value
+                        }
+                    }
+                }
+
             },
             showImage(image)
             {
