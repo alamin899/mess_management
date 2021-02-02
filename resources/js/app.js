@@ -51,6 +51,9 @@ window.toast=toast
 /** Event **/
 window.Event=new Vue();
 
+/** Vue Multiselect **/
+import Multiselect from 'vue-multiselect'
+Vue.component('multiselect', Multiselect)
 
 const app = new Vue({
     el: '#app',
