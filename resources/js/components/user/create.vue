@@ -26,12 +26,13 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="form-group" :class="{ 'is-invalid': form.errors.has('status') }">
+                                    <div class="form-group">
                                         <label>Status</label>
-                                        <select class="form-control" v-model="form.status">
-                                            <option value="1">Active</option>
-                                            <option value="2">Pending</option>
-                                        </select>
+                                        <multiselect v-model="form.status"
+                                                     :options="status"
+                                                     placeholder="Select Status" label="value" track-by="id"
+                                                     :class="{ 'is-invalid': form.errors.has('status') }">
+                                        </multiselect>
                                         <has-error :form="form" field="status"></has-error>
                                     </div>
                                 </div>
@@ -79,6 +80,10 @@
         name: "create",
         data() {
             return {
+                status: [
+                    { id: 1, value: 'Active' },
+                    { id: 2, value: 'Pending' },
+                ],
                 form:new Form(
                     {
                         name:'',
@@ -86,7 +91,7 @@
                         password:'',
                         image:'',
                         password_confirmation:'',
-                        status:1,
+                        status:{ id: 1, value: 'Active' },
                     }
                 )
             }
