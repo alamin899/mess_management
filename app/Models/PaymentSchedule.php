@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use function Symfony\Component\Translation\t;
 
-class PaymentCollection extends Model
+class PaymentSchedule extends Model
 {
-    use HasFactory ,SoftDeletes;
+    use HasFactory , SoftDeletes;
     protected $guarded = ['id'];
 
     public function user()
