@@ -14,7 +14,6 @@ try {
     require('bootstrap');
     require('admin-lte')
     require('material-icons')
-    require('fa-icons')
 } catch (e) {}
 
 /**
