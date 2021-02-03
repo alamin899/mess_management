@@ -22,6 +22,9 @@ class CreatePaymentSchedulesTable extends Migration
             $table->date('paid_date');
             $table->integer('status')->length('1')->comment("0=deactive,1=active")->default(1);
             $table->integer('payment_status')->length('1')->comment("1=unpaid,2=paid")->default(1);
+            $table->integer('created_by')->nullable();
+            $table->integer('updated_by')->nullable();
+            $table->integer('deleted_by')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

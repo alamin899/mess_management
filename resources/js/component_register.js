@@ -15,6 +15,9 @@ Vue.component('payment-head-index', require('./components/payment_head/index.vue
 Vue.component('payment-head-create', require('./components/payment_head/create.vue').default);
 Vue.component('payment-head-edit', require('./components/payment_head/edit.vue').default);
 
+// Payment Schedule
+Vue.component('payment-schedule-index', require('./components/payment_schedule/index.vue').default);
 
-// pagination
+
+                  // pagination
 Vue.component('pagination', require('./components/custome/pagination').default);
