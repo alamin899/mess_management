@@ -24,8 +24,8 @@ class PaymentHeadRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required | unique:payment_heads',
-            'status' => 'required | numeric',
+            'name' => 'required',
+            'status' => 'required',
         ];
     }
 }
