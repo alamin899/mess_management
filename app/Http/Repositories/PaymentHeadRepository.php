@@ -5,20 +5,22 @@ namespace App\Http\Repositories;
 
 
 use App\Models\PaymentHead;
+use phpDocumentor\Reflection\Types\Integer;
 
 class PaymentHeadRepository
 {
 
-    public function index()
+    public function getData($paginate = false , $withTrashed = false , $status = '')
     {
-        return $this->getPaymentHeads('','',true)->paginate(config('constant.PAGINATE'));
+        return ($paginate)? $this->getPaymentHeads('',$status, $withTrashed )->paginate(config('constant.PAGINATE'))
+            : $this->getPaymentHeads('',$status, $withTrashed)->get();
     }
 
     public function store($request)
     {
         return PaymentHead::firstOrCreate([
             'name' => $request->name,
-        ],[
+        ], [
             'status' => $request->status
         ]);
     }
@@ -28,7 +30,7 @@ class PaymentHeadRepository
         return $this->getPaymentHead($id);
     }
 
-    public function update($id , $request)
+    public function update($id, $request)
     {
         $user = $this->getPaymentHead($id);
         $user->name = $request->name;
@@ -44,31 +46,26 @@ class PaymentHeadRepository
 
     public function restore($id)
     {
-        return $this->getPaymentHead($id , true)->restore();
+        return $this->getPaymentHead($id, true)->restore();
     }
 
     public function status($id, $status)
     {
-        $paymentHead = $this->getPaymentHead($id , true);
+        $paymentHead = $this->getPaymentHead($id, true);
         $paymentHead->status = $status;
         $paymentHead->update();
-        if ($paymentHead->status == 1)
-        {
+        if ($paymentHead->status == 1) {
             return "active";
-        }
-        elseif ($paymentHead->status == 0)
-        {
+        } elseif ($paymentHead->status == 0) {
             return "deactive";
-        }
-        else
-        {
+        } else {
             return $paymentHead;
         }
     }
 
-    public function getPaymentHeads($name = '' , $status = '' , $withTrashed = false)
+    public function getPaymentHeads($name = '', $status = '', $withTrashed = false)
     {
-        ($withTrashed)?$paymentHeads = PaymentHead::withTrashed()->latest() : $paymentHeads = PaymentHead::query()->latest() ;
+        ($withTrashed) ? $paymentHeads = PaymentHead::withTrashed()->latest() : $paymentHeads = PaymentHead::query()->latest();
         $paymentHeads->when((!empty($name)), function ($paymentHeads) use ($name) {
             $paymentHeads->where('name', $name);
         });
@@ -78,15 +75,12 @@ class PaymentHeadRepository
         return $paymentHeads;
     }
 
-    public function getPaymentHead($id , $withTrashed = false)
+    public function getPaymentHead($id, $withTrashed = false , $status = '')
     {
-        if ($withTrashed)
-        {
-            $paymentHead = PaymentHead::withTrashed()->find($id);
-        }
-        else{
-            $paymentHead = PaymentHead::find($id);
-        }
-        return $paymentHead;
+        $paymentHead =($withTrashed)? PaymentHead::withTrashed() : PaymentHead::query();
+        $paymentHead->when((!empty($status)), function ($paymentHead) use ($status) {
+            $paymentHead->where('status', $status);
+        });
+        return $paymentHead->find($id);
     }
 }

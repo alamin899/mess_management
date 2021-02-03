@@ -20,10 +20,11 @@
                                 <div class="col-md-6">
                                     <div class="form-group" :class="{ 'is-invalid': form.errors.has('status') }">
                                         <label for="status">Status</label>
-                                        <select class="form-control" v-model="form.status" id="status">
-                                            <option value="1">Active</option>
-                                            <option value="0">Deactive</option>
-                                        </select>
+                                        <multiselect v-model="form.status" id="status"
+                                                     :options="status"
+                                                     placeholder="Select Status" label="value" track-by="id"
+                                                     :class="{ 'is-invalid': form.errors.has('status') }">
+                                        </multiselect>
                                         <has-error :form="form" field="status"></has-error>
                                     </div>
                                 </div>
@@ -46,10 +47,14 @@
         data() {
             return {
                 edit:'',
+                status: [
+                    { id: 0, value: 'Pending' },
+                    { id: 1, value: 'Active' },
+                ],
                 form:new Form(
                     {
                         name:'',
-                        status:1,
+                        status:{ id: 1, value: 'Active' },
                     }
                 )
             }
@@ -63,8 +68,20 @@
                 axios.get('/api/payment-head/' + this.$route.params.payment_head_id)
                     .then((response)=>{
                         this.form.name = response.data.data.name
-                        this.form.status = response.data.data.status
+                        this.selectStatus(response.data.data.status)
                     })
+            },
+            selectStatus(id)
+            {
+                for(var i =0 ;i<this.status.length;i++) {
+                    if (this.status[i].id == id) {
+                        this.form.status ={
+                            id: id,
+                            value: this.status[i].value
+                        }
+                    }
+                }
+
             },
             update(){
                 this.form.put('/api/payment-head/'+this.$route.params.payment_head_id)

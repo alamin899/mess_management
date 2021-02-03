@@ -11,9 +11,10 @@ use Image;
 
 class UserManagementRepository
 {
-    public function index()
+    public function getData($paginate = false , $withTrashed = false )
     {
-        return $this->getUsers('','',true)->paginate(config('constant.PAGINATE'));
+        return ($paginate)? $this->getUsers('','', $withTrashed )->paginate(config('constant.PAGINATE'))
+            : $this->getUsers('','', $withTrashed)->get();
     }
 
     public function show($id)
