@@ -32,7 +32,7 @@
                         </div>
                         <div class="card-footer">
                             <router-link to="payment-head" class="btn btn-primary">Back</router-link>
-                            <button type="submit" class="btn btn-success" :disabled="form.busy">Submit</button>
+                            <button type="submit" class="btn btn-success" :disabled="form.busy"><i class="fa fa-refresh fa-spin"></i>Submit</button>
                         </div>
                     </form>
                 </div>
