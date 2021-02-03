@@ -53,6 +53,12 @@
                                 <p>Payment Head</p>
                             </router-link>
                         </li>
+                        <li class="nav-item">
+                            <router-link to="payment-schedule" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Payment Schedule</p>
+                            </router-link>
+                        </li>
                     </ul>
                 </li>
             </ul>

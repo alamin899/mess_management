@@ -11,7 +11,7 @@ class PaymentHeadObserver
     public $userId;
     public function __construct(PaymentHead $paymentHead){
         $this->paymentHead = $paymentHead;
-        $this->userId = Auth::guard('api')->user();
+        $this->userId = Auth::guard('api')->id();
     }
     public function creating($paymentHead)
     {

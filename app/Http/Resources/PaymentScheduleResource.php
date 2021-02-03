@@ -2,9 +2,10 @@
 
 namespace App\Http\Resources;
 
+use App\Models\PaymentHead;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class PaymentHeadResource extends JsonResource
+class PaymentScheduleResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,9 +17,14 @@ class PaymentHeadResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
+            'user' => new UserResource($this->user),
+            'paymentHead' => new PaymentHeadResource($this->paymentHead),
+            'amount' => $this->amount,
+            'paid_date' => $this->paid_date,
             'status' => $this->status,
+            'payment_status' => $this->payment_status,
             'deleted_at' => $this->deleted_at,
+            'meta' => $this->meta,
         ];
     }
 }
