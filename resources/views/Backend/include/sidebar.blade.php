@@ -23,16 +23,16 @@
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <i class="nav-icon"></i>
                         <p>
                             User Management
-                            <i class="right fas fa-angle-left"></i>
+                            <i class="right fa fa-angle-left"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <router-link to="user" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="fa fa-circle nav-icon"></i>
                                 <p>User</p>
                             </router-link>
                         </li>
@@ -40,22 +40,22 @@
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <i class="nav-icon"></i>
                         <p>
                             Payment Management
-                            <i class="right fas fa-angle-left"></i>
+                            <i class="right fa fa-angle-left"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <router-link to="payment-head" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="fa fa-circle nav-icon"></i>
                                 <p>Payment Head</p>
                             </router-link>
                         </li>
                         <li class="nav-item">
                             <router-link to="payment-schedule" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="fa fa-circle nav-icon"></i>
                                 <p>Payment Schedule</p>
                             </router-link>
                         </li>

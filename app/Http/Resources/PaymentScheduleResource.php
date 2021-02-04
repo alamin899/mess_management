@@ -24,7 +24,6 @@ class PaymentScheduleResource extends JsonResource
             'status' => $this->status,
             'payment_status' => $this->payment_status,
             'deleted_at' => $this->deleted_at,
-            'meta' => $this->meta,
         ];
     }
 }

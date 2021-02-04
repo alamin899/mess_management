@@ -98,7 +98,7 @@
                         this.form.image = event.target.result
                     };
                     reader.readAsDataURL(file);
-                }
+                }this.selectStatus(response.data.data.status)
             },
             getUser()
             {
@@ -106,21 +106,16 @@
                     .then((response)=>{
                         this.form.name = response.data.data.name
                         this.form.email = response.data.data.email
-                        this.selectStatus(response.data.data.status)
+
                         this.showImage(response.data.data.image)
                     })
             },
-            selectStatus(id)
-            {
-                for(var i =0 ;i<this.status.length;i++) {
-                    if (this.status[i].id == id) {
-                        this.form.status ={
-                            id: id,
-                            value: this.status[i].value
-                        }
-                    }
+            selectStatus(id) {
+                var status = this.status.find(stat => stat.id === id);
+                this.form.status = {
+                    id: status.id,
+                    value: status.value
                 }
-
             },
             showImage(image)
             {
