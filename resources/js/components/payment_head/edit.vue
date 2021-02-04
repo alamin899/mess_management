@@ -71,17 +71,12 @@
                         this.selectStatus(response.data.data.status)
                     })
             },
-            selectStatus(id)
-            {
-                for(var i =0 ;i<this.status.length;i++) {
-                    if (this.status[i].id == id) {
-                        this.form.status ={
-                            id: id,
-                            value: this.status[i].value
-                        }
-                    }
+            selectStatus(id) {
+                var status = this.status.find(stat => stat.id === id);
+                this.form.status = {
+                    id: status.id,
+                    value: status.value
                 }
-
             },
             update(){
                 this.form.put('/api/payment-head/'+this.$route.params.payment_head_id)
