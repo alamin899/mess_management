@@ -13,8 +13,8 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Payment Schedule</h3>
-                        <a href="#" class="btn btn-primary float-right">Add Payment Schedule
-                        </a>
+                        <router-link to="payment-schedule-create" class="btn btn-primary float-right">Add Payment Schedule
+                        </router-link>
                     </div>
                     <div class="card-body">
                         <table v-if="getPaymentScheduleData != '' " class="table table-bordered table-responsive-md table-responsive-sm">
