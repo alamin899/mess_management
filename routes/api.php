@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\Backend\PaymentHeadController;
+use App\Http\Controllers\Api\Backend\PaymentScheduleController;
 use App\Http\Controllers\Api\Backend\UserManagementController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -33,3 +34,6 @@ Route::put('/payment-head/{payment_head_id}',[PaymentHeadController::class, 'upd
 Route::delete('/payment-head/{payment_head_id}',[PaymentHeadController::class, 'destroy']);
 Route::patch('/payment-head/{payment_head_id}',[PaymentHeadController::class, 'restore']);
 Route::get('/payment-head/{payment_head_id}/status/{status_id}',[PaymentHeadController::class, 'status']);
+
+/** Payment Head Crud */
+Route::get('/payment-schedule',[PaymentScheduleController::class, 'index']);
