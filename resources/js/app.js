@@ -51,9 +51,18 @@ window.toast=toast
 /** Event **/
 window.Event=new Vue();
 
+//Start Moment
+import moment from 'moment'
+window.moment =moment
+
 /** Vue Multiselect **/
 import Multiselect from 'vue-multiselect'
 Vue.component('multiselect', Multiselect)
+
+// global method using mixin
+import globalDateTimeMethod from './global_methods/date_time'
+Vue.mixin(globalDateTimeMethod);
+
 
 const app = new Vue({
     el: '#app',
