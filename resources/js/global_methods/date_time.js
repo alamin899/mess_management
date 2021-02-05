@@ -1,7 +1,7 @@
 
 export default {
         methods: {
-            showDateFormateInView(date,format='DD-MM-YYYY')
+            showDateFormateInView(date,format='YYYY-MM-DD')
             {
                 return moment(date).format(format)
             },
@@ -36,9 +36,13 @@ export default {
                 return this.months[month-1]
             },
 
-            getDateMonthly(date , monthNumber = 0 , format='DD-MM-YYYY')   //from date how many number of month want to get if number 2 and date 2021-04-31 result will 2021-06-31
+            getDateMonthly(date , monthNumber = 0 , format='YYYY-MM-DD')   //from date how many number of month want to get if number 2 and date 2021-04-31 result will 2021-06-31
             {
                 return moment(date).add(monthNumber, 'M').format(format);
+            },
+            getDateDaily(date , dayNumber = 0 , format='YYYY-MM-DD')   //from date how many number of month want to get if number 2 and date 2021-04-31 result will 2021-06-31
+            {
+                return moment(date).add(dayNumber, 'd').format(format);
             }
         },
     };

@@ -6,10 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Repositories\PaymentHeadRepository;
 use App\Http\Requests\PaymentHeadRequest;
 use App\Http\Resources\PaymentHeadResource;
+use App\Models\PaymentHead;
 use Illuminate\Http\Request;
 
 class PaymentHeadController extends Controller
 {
+    public $paymentHeadRepository;
     public function __construct(PaymentHeadRepository $paymentHeadRepository)
     {
         $this->paymentHeadRepository = $paymentHeadRepository;
@@ -18,6 +20,12 @@ class PaymentHeadController extends Controller
     public function index(Request $request)
     {
         return ($request->ajax()) ? PaymentHeadResource::collection($this->paymentHeadRepository->getData(true,true)) : abort(401 , 'Bad request');
+    }
+
+    public function listData(Request $request)
+    {
+//        return ["PaymentHead::all()"];
+        return ($request->ajax()) ? PaymentHeadResource::collection($this->paymentHeadRepository->getData(false,false)) : abort(401 , 'Bad request');
     }
 
     public function store(PaymentHeadRequest $paymentHeadRequest)
