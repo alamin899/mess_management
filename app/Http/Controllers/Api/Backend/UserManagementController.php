@@ -7,6 +7,7 @@ use App\Http\Repositories\UserManagementRepository;
 use App\Http\Requests\UserRequest;
 use App\Http\Resources\UserResource;
 use App\Http\Traits\ApiReturnMessage;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserManagementController extends Controller
@@ -19,6 +20,10 @@ class UserManagementController extends Controller
     public function index(Request $request)
     {
         return ($request->ajax()) ? UserResource::collection($this->userManagementRepository->getData(true, true)) : abort(401, 'Bad request');
+    }
+    public function userList(Request $request)
+    {
+        return ($request->ajax()) ? UserResource::collection($this->userManagementRepository->getData(false, true)) : abort(401, 'Bad request');
     }
 
     public function store(UserRequest $userRequest)

@@ -17,7 +17,7 @@
                         </router-link>
                     </div>
                     <div class="card-body">
-                        <table class="table table-bordered table-responsive-md table-responsive-sm">
+                        <table v-if="getPaymentHeadData != '' " class="table table-bordered table-responsive-md table-responsive-sm">
                             <thead>
                             <tr>
                                 <th style="width: 10px" class="text-center">#SL</th>
@@ -42,6 +42,7 @@
                             </tr>
                             </tbody>
                         </table>
+                        <label v-else class="font-weight-bold text-danger">No Data Found</label>
                     </div>
                     <div class="card-footer">
                         <pagination

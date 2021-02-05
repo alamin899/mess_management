@@ -12,7 +12,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="headName">Head Name</label>
+                                        <label for="headName" class="required">Head Name</label>
                                         <input type="text" v-model="form.name" class="form-control" :class="{ 'is-invalid': form.errors.has('name') }" id="headName" placeholder="Enter Head Name">
                                         <has-error :form="form" field="name"></has-error>
                                     </div>
@@ -32,7 +32,7 @@
                         </div>
                         <div class="card-footer">
                             <router-link to="payment-head" class="btn btn-primary">Back</router-link>
-                            <button type="submit" class="btn btn-success" :disabled="form.busy"><i class="fa fa-refresh fa-spin"></i>Submit</button>
+                            <button type="submit" class="btn btn-success" :disabled="form.busy"><i :class="btnLoader"></i>&nbsp;Submit</button>
                         </div>
                     </form>
                 </div>
@@ -46,6 +46,7 @@
         name: "create",
         data() {
             return {
+                btnLoader:'',
                 status: [
                     { id: 0, value: 'Pending' },
                     { id: 1, value: 'Active' },
@@ -60,6 +61,7 @@
         },
         methods:{
             paymentHeadStore(){
+                this.btnLoader = 'fa fa-refresh fa-spin'
                 this.form.post('/api/payment-head')
                     .then((response)=>{
                         if (response.data.message == "success"){
@@ -69,12 +71,14 @@
                                 icon: 'success',
                                 title: 'Payment head Created successfully'
                             })
+                            this.btnLoader = ''
                         }
                         else {
                             toast.fire({
                                 icon: 'error',
                                 title: 'Failed To Insert '
                             })
+                            this.btnLoader = ''
                         }
                     })
                 .catch((error)=>{
@@ -82,6 +86,7 @@
                         icon: 'error',
                         title: error
                     })
+                    this.btnLoader = ''
                 })
             }
         }

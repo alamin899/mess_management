@@ -32,7 +32,7 @@
                         </div>
                         <div class="card-footer">
                             <router-link to="payment-head" class="btn btn-primary">Back</router-link>
-                            <button type="submit" class="btn btn-success" :disabled="form.busy">Update</button>
+                            <button type="submit" class="btn btn-success" :disabled="form.busy"><i :class="btnLoader"></i>&nbsp;Update</button>
                         </div>
                     </form>
                 </div>
@@ -46,6 +46,7 @@
         name: "edit",
         data() {
             return {
+                btnLoader : '',
                 edit:'',
                 status: [
                     { id: 0, value: 'Pending' },
@@ -79,6 +80,7 @@
                 }
             },
             update(){
+                this.btnLoader = 'fa fa-refresh fa-spin'
                 this.form.put('/api/payment-head/'+this.$route.params.payment_head_id)
                     .then((response)=>{
                         if (response.data.message == "success"){
@@ -88,12 +90,14 @@
                                 icon: 'success',
                                 title: 'Payment Head Updated successfully'
                             })
+                            this.btnLoader = ''
                         }
                         else {
                             toast.fire({
                                 icon: 'error',
                                 title: 'Failed To Insert '
                             })
+                            this.btnLoader = ''
                         }
                     })
             }
