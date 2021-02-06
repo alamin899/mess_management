@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 class PaymentScheduleController extends Controller
 {
+    public $paymentScheduleRepository;
     public function __construct(PaymentScheduleRepository $paymentScheduleRepository)
     {
         $this->paymentScheduleRepository = $paymentScheduleRepository;
@@ -17,11 +18,6 @@ class PaymentScheduleController extends Controller
     public function index(Request $request)
     {
         return ($request->ajax()) ? PaymentScheduleResource::collection($this->paymentScheduleRepository->getData(true,true)) : abort(401 , 'Bad request');
-    }
-
-    public function create()
-    {
-        //
     }
 
     public function store(Request $request)
@@ -36,12 +32,6 @@ class PaymentScheduleController extends Controller
     }
 
 
-    public function edit($id)
-    {
-        //
-    }
-
-
     public function update(Request $request, $id)
     {
         //
@@ -49,6 +39,16 @@ class PaymentScheduleController extends Controller
 
 
     public function destroy($id)
+    {
+        //
+    }
+
+    public function restore($id)
+    {
+        //
+    }
+
+    public function status($id, $status)
     {
         //
     }
