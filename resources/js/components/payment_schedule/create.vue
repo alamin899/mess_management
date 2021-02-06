@@ -12,7 +12,7 @@
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 noprint">
                                 <form>
                                     <div class="form-row align-items-center">
-                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 my-1">
+                                        <div class="col-md-2">
                                             <multiselect v-model="head" id="head"
                                                          :options="this.heads"
                                                          :searchable="true"
@@ -20,7 +20,7 @@
                                             >
                                             </multiselect>
                                         </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 my-1">
+                                        <div class="col-md-3">
                                             <multiselect v-model="user" id="user"
                                                          :options="this.users"
                                                          :searchable="true"
@@ -28,25 +28,20 @@
                                             </multiselect>
                                         </div>
 
-                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 my-1">
+                                        <div class="col-md-3">
                                             <input type="date" v-model="paid_date"
                                                    class="form-control date"
                                                    placeholder="enterpaid date">
                                         </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 my-1">
-                                            <input type="number" v-model="amount"
-                                                   class="form-control"
-                                                   placeholder="Enter Amout">
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 my-1">
+                                        <div class="col-sm-2">
                                             <input type="number" id="paid_date" v-model="period"
                                                    class="form-control "
                                                    placeholder="Enter period">
                                         </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 my-1">
+                                        <div class=" col-md-2">
                                             <button type="submit"
                                                     class="btn btn-primary col-md-12"
-                                                    v-if="this.user != '' && this.head != '' && this.paid_date != '' && this.amount != '' && this.period != ''"
+                                                    v-if="this.user != '' && this.head != '' && this.paid_date != ''  && this.period != ''"
                                                     @click.prevent="showHide" id="submit"><i :class="btnLoader"></i>&nbsp;Generate
                                             </button>
                                             <button v-else class="btn btn-primary col-md-12" disabled>Generate</button>
@@ -63,7 +58,6 @@
                 :show-hide="this.show_hide"
                 :head="this.head"
                 :user="this.user"
-                :amount="this.amount"
                 :period="this.period"
                 :paid-date="this.paid_date"
         ></payment-schedule-list>
@@ -80,7 +74,6 @@
                 head: '',
                 user: '',
                 paid_date: '',
-                amount: '',
                 period: '',
                 heads: [],
                 users: [],

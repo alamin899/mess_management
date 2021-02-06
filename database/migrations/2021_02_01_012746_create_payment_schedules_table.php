@@ -18,7 +18,6 @@ class CreatePaymentSchedulesTable extends Migration
             $table->id();
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('payment_head_id')->unsigned();
-            $table->float('amount')->unsigned();
             $table->date('paid_date');
             $table->integer('status')->length('1')->comment("0=deactive,1=active")->default(1);
             $table->integer('payment_status')->length('1')->comment("1=unpaid,2=paid")->default(1);

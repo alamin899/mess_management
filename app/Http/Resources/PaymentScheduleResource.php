@@ -19,7 +19,6 @@ class PaymentScheduleResource extends JsonResource
             'id' => $this->id,
             'user' => new UserResource($this->user),
             'paymentHead' => new PaymentHeadResource($this->paymentHead),
-            'amount' => $this->amount,
             'paid_date' => $this->paid_date,
             'status' => $this->status,
             'payment_status' => $this->payment_status,
