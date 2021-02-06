@@ -14,6 +14,11 @@ class PaymentScheduleRepository
              ->paginate(config('constant.PAGINATE')) : $this->getPaymentSchedules('','','',$status,'', $withTrashed)->get();
     }
 
+    public function store($request)
+    {
+
+    }
+
     public function getPaymentSchedules($user_id = '', $payment_head_id = '', $payment_head_name = '', $status = '', $payment_status = '', $withTrashed = false)
     {
         ($withTrashed) ? $paymentSchedules = PaymentSchedule::withTrashed()->latest() : $paymentSchedules = PaymentSchedule::query()->latest();
