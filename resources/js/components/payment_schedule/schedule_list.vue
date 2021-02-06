@@ -8,7 +8,6 @@
                     <th style="width: 10px" class="text-center">#SL</th>
                     <th class="text-center">Head</th>
                     <th class="text-center">User</th>
-                    <th class="text-center">Amount</th>
                     <th class="text-center">Paid Date</th>
                     <th class="text-center">Action</th>
                 </tr>
@@ -20,7 +19,6 @@
                                v-model="form.payment_schedules[index].payment_head_name" readonly></td>
                     <td><input class="form-control" type="text" v-model="form.payment_schedules[index].user_name"
                                readonly></td>
-                    <td><input class="form-control" type="number" v-model="form.payment_schedules[index].amount"></td>
                     <td><input class="form-control" type="date" v-model="form.payment_schedules[index].paid_date"></td>
                     <td><a href="#" @click.prevent="removeSchedule(index)"><span class="material-icons" title="remove"
                                                                                  style="color: red">remove_circle_outline</span></a>
@@ -43,7 +41,6 @@
             showHide: {},
             head: {},
             user: {},
-            amount: {},
             paidDate: {},
             period: {}
         },
@@ -56,7 +53,6 @@
                             user_name: '',
                             payment_head_id: '',
                             payment_head_name: '',
-                            amount: '',
                             paid_date: '',
                         }],
                     }
@@ -73,9 +69,6 @@
             user: function (newD, oldD) {
                 this.conditionCheck()
             },
-            amount: function (newD, oldD) {
-                this.conditionCheck()
-            },
             period: function (newD, oldD) {
                 this.conditionCheck()
             },
@@ -85,7 +78,7 @@
         },
         methods: {
             conditionCheck(){
-                if (this.user != '' && this.head != '' && this.paidDate != '' && this.amount != '' && this.period != ''){
+                if (this.user != '' && this.head != '' && this.paidDate != ''  && this.period != ''){
                     this.paymentSchedule()
                 }
             },
@@ -97,7 +90,6 @@
                         user_name: this.user.name,
                         payment_head_id: this.head.id,
                         payment_head_name: this.head.name,
-                        amount: this.amount,
                         paid_date: this.getDateDaily(this.paidDate, i),
                     })
                 }
