@@ -104,6 +104,7 @@
                 this.form.post('/payment-schedule')
                     .then((response)=>{
                         if (response.data == "success"){
+                            this.$router.push('/payment-schedule')
                             this.form.reset()
                             toast.fire({
                                 icon: 'success',
