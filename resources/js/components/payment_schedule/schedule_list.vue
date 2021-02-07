@@ -1,5 +1,12 @@
 <template>
   <div class="row">
+    <div class="vld-parent">
+      <Loading :active.sync="isLoading"
+               :can-cancel="false"
+               :loader="'bars'"
+               :is-full-page=true>
+      </Loading>
+    </div>
     <div class="col-md-12 col-sm-12" :class="this.showHide">
       <table v-if="this.form.payment_schedules.length >1"
              class="table table-bordered table-responsive-md table-responsive-sm">
@@ -49,6 +56,7 @@ export default {
   data() {
     return {
       btnLoader: '',
+      isLoading: false,
       form: new Form(
           {
             payment_schedules: [{
@@ -104,6 +112,7 @@ export default {
       }
     },
     paymentScheduleStore() {
+      this.isLoading = true
       this.btnLoader = 'fa fa-refresh fa-spin'
       this.form.post('/payment-schedule')
           .then((response) => {
@@ -115,12 +124,14 @@ export default {
                 title: 'Payment Schedule Created successfully'
               })
               this.btnLoader = ''
+              this.isLoading = false
             } else {
               toast.fire({
                 icon: 'error',
                 title: 'Failed To Insert '
               })
               this.btnLoader = ''
+              this.isLoading = false
             }
           })
           .catch((error) => {
@@ -129,6 +140,7 @@ export default {
               title: error
             })
             this.btnLoader = ''
+            this.isLoading = false
           })
     }
   }
