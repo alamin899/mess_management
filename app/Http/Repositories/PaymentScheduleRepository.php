@@ -16,7 +16,11 @@ class PaymentScheduleRepository
 
     public function store($request)
     {
-
+      $data = array_chunk($request , 100);
+      foreach ($data as $req){
+          $store = PaymentSchedule::insert($req);
+      }
+      return $store;
     }
 
     public function getPaymentSchedules($user_id = '', $payment_head_id = '', $payment_head_name = '', $status = '', $payment_status = '', $withTrashed = false)
