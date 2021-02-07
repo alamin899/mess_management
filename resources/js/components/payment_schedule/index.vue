@@ -23,7 +23,6 @@
                                 <th style="width: 10px" class="text-center">#SL</th>
                                 <th class="text-center">Head</th>
                                 <th class="text-center">User</th>
-                                <th class="text-center">Amount</th>
                                 <th class="text-center">Paid Date</th>
                                 <th class="text-center">Payment Status</th>
                                 <th class="text-center">Action</th>
@@ -34,7 +33,6 @@
                                 <td>{{pagination.from+index}}</td>
                                 <td>{{paymentSchedule.paymentHead.name}}</td>
                                 <td>{{paymentSchedule.user.name}}</td>
-                                <td>{{paymentSchedule.amount}}</td>
                                 <td>{{paymentSchedule.paid_date}}</td>
                                 <td v-if="paymentSchedule.payment_status == 2" class="text-center">
                                     <button type="button" class="btn btn-outline-success" disabled>Paid</button>

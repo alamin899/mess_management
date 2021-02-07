@@ -16,7 +16,7 @@ class PaymentScheduleRepository
 
     public function store($request)
     {
-      $data = array_chunk($request , 100);
+      $data = array_chunk($request , count($request)/2);
       foreach ($data as $req){
           $store = PaymentSchedule::insert($req);
       }
