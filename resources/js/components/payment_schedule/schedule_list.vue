@@ -29,7 +29,7 @@
             <div class="row" v-else><label>No Data Found</label></div>
         </div>
         <div class="col-lg-12 col-sm-12 col-md-12" :class="this.showHide">
-            <button type="submit" @click.prevent="paymentScheduleStore" class="btn btn-primary mb-4">Submit</button>
+            <button type="submit" @click.prevent="paymentScheduleStore" :disabled="form.busy" class="btn btn-primary mb-4"><i :class="btnLoader"></i>&nbsp;&nbsp;Submit</button>
         </div>
     </div>
 </template>
@@ -46,6 +46,7 @@
         },
         data() {
             return {
+              btnLoader : '',
                 form: new Form(
                     {
                         payment_schedules: [{
@@ -101,20 +102,24 @@
                 }
             },
             paymentScheduleStore(){
+              this.btnLoader = 'fa fa-refresh fa-spin'
                 this.form.post('/payment-schedule')
                     .then((response)=>{
                         if (response.data == "success"){
+                            this.$router.push('/payment-schedule')
                             this.form.reset()
                             toast.fire({
                                 icon: 'success',
                                 title: 'Payment Schedule Created successfully'
                             })
+                          this.btnLoader = ''
                         }
                         else {
                             toast.fire({
                                 icon: 'error',
                                 title: 'Failed To Insert '
                             })
+                          this.btnLoader = ''
                         }
                     })
                     .catch((error)=>{
@@ -122,6 +127,7 @@
                             icon: 'error',
                             title: error
                         })
+                      this.btnLoader = ''
                     })
             }
         }
