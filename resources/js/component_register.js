@@ -18,6 +18,7 @@ Vue.component('payment-head-edit', require('./components/payment_head/edit.vue')
 // Payment Schedule
 Vue.component('payment-schedule-index', require('./components/payment_schedule/index.vue').default);
 Vue.component('payment-schedule-list', require('./components/payment_schedule/schedule_list.vue').default);
+Vue.component('payment-schedule-edit', require('./components/payment_schedule/edit.vue').default);
 
 
                   // pagination

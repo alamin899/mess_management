@@ -5,12 +5,14 @@ namespace App\Http\Controllers\Api\Backend;
 use App\Http\Controllers\Controller;
 use App\Http\Repositories\PaymentScheduleRepository;
 use App\Http\Resources\PaymentScheduleResource;
+use App\Http\Traits\Payment;
 use App\Models\PaymentSchedule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class PaymentScheduleController extends Controller
 {
+    use Payment;
     public $paymentScheduleRepository;
     public function __construct(PaymentScheduleRepository $paymentScheduleRepository)
     {
@@ -75,5 +77,10 @@ class PaymentScheduleController extends Controller
     public function status($id, $status)
     {
         //
+    }
+
+    public function paymentStatus()
+    {
+        return $this->getPaymentStatus();
     }
 }
