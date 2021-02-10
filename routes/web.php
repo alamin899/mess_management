@@ -15,5 +15,9 @@ Route::group(['middleware' => 'auth'], function () {
     //payment schedule
     Route::post('/payment-schedule',[PaymentScheduleController::class, 'store'])->name('payment-schedule.store');
 
+    //payment status
+    Route::get('/payment-status',[PaymentScheduleController::class, 'paymentStatus'])->name('payment-status');
+
+
 
 });

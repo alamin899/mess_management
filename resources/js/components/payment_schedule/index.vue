@@ -41,7 +41,7 @@
                                     <button type="button" class="btn btn-outline-danger" disabled>Unpaid</button>
                                 </td>
                                 <td class="text-center" v-if="paymentSchedule.deleted_at == null">
-                                    <a href="#"><span class="material-icons" title="edit">edit</span></a>
+                                    <a href="#" @click.prevent="updatePaymentScheduleId(paymentSchedule.id)" data-toggle="modal" data-target="#paymentScheduleEditModal"><span class="material-icons" title="edit">edit</span></a>
                                     <a href="#"><span class="material-icons" style="color: red;"
                                                       title="delete">delete</span></a>
                                 </td>
@@ -65,18 +65,8 @@
                 </div>
             </div>
         </div>
+      <payment-schedule-edit :payment-schedule-id = "paymentScheduleId"></payment-schedule-edit>
     </div>
-    <!--    <div>-->
-    <!--        <label class="typo__label">Groups</label>-->
-    <!--        <multiselect-->
-    <!--                v-model="value"-->
-    <!--                :options="options"-->
-    <!--                :multiple="true"-->
-    <!--                group-values="libs"-->
-    <!--                group-label="language"-->
-    <!--                :group-select="true" :close-on-select="false" placeholder="Type to search" track-by="name" label="name"><span slot="noResult">Oops! No elements found. Consider changing the search query.</span></multiselect>-->
-    <!--        <pre class="language-json"><code>{{ value  }}</code></pre>-->
-    <!--    </div>-->
 </template>
 
 <script>
@@ -84,22 +74,10 @@
         name: "index",
         data() {
             return {
-                options: [
-                    {
-                        language: 'Javascript',
-                        libs: [
-                            {name: 'Vue.js', category: 'Front-end'},
-                            {name: 'Adonis', category: 'Backend'},
-                            {name: 'Rails', category: 'Backend'},
-                            {name: 'Sinatra', category: 'Backend'},
-                            {name: 'Laravel', category: 'Backend'}]
-                    },
-                ],
-                value: '',
-
                 isLoading: false,
                 isSearch: '',
                 getPaymentScheduleData: '',
+                paymentScheduleId:'',
                 pagination: {
                     current_page: 1
                 },
@@ -121,6 +99,9 @@
                         this.pagination = response.data.meta
                     })
             },
+          updatePaymentScheduleId(id){
+            this.paymentScheduleId = id
+          },
         }
     }
 </script>
