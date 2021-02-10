@@ -65,6 +65,20 @@ export default {
   mounted() {
     this.paymentStatus()
   },
+  watch: {
+    paymentScheduleId: function (newValue, oldValue) {
+      axios.get('/payment-schedule/' + newValue)
+          .then((response) => {
+            this.form.user_id = response.data.data.user.id
+            this.form.payment_head_id = response.data.data.paymentHead.id
+            this.form.paid_date = response.data.data.paid_date
+            this.form.status = response.data.data.status
+            this.form.payment_status = response.data.data.payment_status
+            this.user_name = response.data.data.user.name
+            this.head_name = response.data.data.paymentHead.name
+          })
+    }
+  },
   methods:{
     paymentStatus() {
       axios.get('/payment-status')

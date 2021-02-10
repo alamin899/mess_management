@@ -13,6 +13,10 @@ class PaymentScheduleRepository
         return ($paginate)? $this->getPaymentSchedules('','','',$status,'', $withTrashed )
              ->paginate(config('constant.PAGINATE')) : $this->getPaymentSchedules('','','',$status,'', $withTrashed)->get();
     }
+    public function show($id)
+    {
+        return $this->getPaymentSchedule($id);
+    }
 
     public function store($request)
     {
@@ -42,6 +46,15 @@ class PaymentScheduleRepository
             $paymentSchedules->where('payment_status', $payment_status);
         });
         return $paymentSchedules;
+    }
+
+    public function getPaymentSchedule($id  , $withTrashed = '' , $status = '')
+    {
+        $paymentSchedule =($withTrashed)? PaymentSchedule::withTrashed() : PaymentSchedule::query();
+        $paymentSchedule->when((!empty($status)), function ($paymentSchedule) use ($status) {
+            $paymentSchedule->where('status', $status);
+        });
+        return $paymentSchedule->find($id);
     }
 
     protected function paymentScheduleByHeadName($paymentSchedules , $payment_head_name)

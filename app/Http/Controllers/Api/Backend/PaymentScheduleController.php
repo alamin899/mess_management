@@ -29,6 +29,10 @@ class PaymentScheduleController extends Controller
         $store = $this->paymentScheduleRepository->store($this->getArray($request));
         return ($store)? "success":"failed";
     }
+    public function show($id , Request $request)
+    {
+        return ($request->ajax()) ? new PaymentScheduleResource($this->paymentScheduleRepository->show($id)) : abort('401', "Bad Request");
+    }
 
     protected function getArray($request){
         $data = [];
@@ -50,13 +54,6 @@ class PaymentScheduleController extends Controller
         }
         return $data;
     }
-
-
-    public function show($id)
-    {
-        //
-    }
-
 
     public function update(Request $request, $id)
     {
