@@ -27,6 +27,18 @@ class PaymentScheduleRepository
       return $store;
     }
 
+    public function update($id , $request)
+    {
+        $paymentSchedule = $this->getPaymentSchedule($id);
+        $paymentSchedule->student_id = $request->student_id;
+        $paymentSchedule->payment_head_id = $request->payment_head_id;
+        $paymentSchedule->paid_date = $request->paid_date;
+        $paymentSchedule->status = $request->status;
+        $paymentSchedule->payment_status = $request->payment_status;
+        return $paymentSchedule->update();
+
+    }
+
     public function getPaymentSchedules($user_id = '', $payment_head_id = '', $payment_head_name = '', $status = '', $payment_status = '', $withTrashed = false)
     {
         ($withTrashed) ? $paymentSchedules = PaymentSchedule::withTrashed()->latest() : $paymentSchedules = PaymentSchedule::query()->latest();
