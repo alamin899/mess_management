@@ -30,7 +30,7 @@ class PaymentScheduleRepository
     public function update($id , $request)
     {
         $paymentSchedule = $this->getPaymentSchedule($id);
-        $paymentSchedule->student_id = $request->student_id;
+        $paymentSchedule->user_id = $request->user_id;
         $paymentSchedule->payment_head_id = $request->payment_head_id;
         $paymentSchedule->paid_date = $request->paid_date;
         $paymentSchedule->status = $request->status;

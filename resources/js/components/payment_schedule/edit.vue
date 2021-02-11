@@ -32,7 +32,7 @@
                   data-dismiss="modal">Close
           </button>
           <button type="button" class="btn btn-primary" :disabled="form.busy"
-                  @click.prevent="">Update
+                  @click.prevent="update"><i :class="btnLoader"></i>Update
           </button>
         </div>
       </div>
@@ -51,6 +51,7 @@ export default {
       getPaymentStatus:'',
       user_name:'',
       head_name : '',
+      btnLoader : '',
       form: new Form(
           {
             user_id:'',
@@ -87,7 +88,31 @@ export default {
           })
     },
     closeModal() {
+      this.$refs.closeBtn.click();   // brn ref name closBtn
       this.form.reset()
+    },
+    update(){
+      this.btnLoader = 'fa fa-refresh fa-spin'
+      this.form.put('/payment-schedule/'+this.paymentScheduleId)
+          .then((response)=>{
+            if (response.data== "success"){
+              this.closeModal()
+              this.form.reset()
+              Event.$emit('paymentScheduleEvent')
+              toast.fire({
+                icon: 'success',
+                title: 'Payment Schedule Updated successfully'
+              })
+              this.btnLoader = ''
+            }
+            else {
+              toast.fire({
+                icon: 'error',
+                title: 'Failed To Insert '
+              })
+              this.btnLoader = ''
+            }
+          })
     }
   }
 
