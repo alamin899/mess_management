@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Repositories\PaymentScheduleRepository;
+use App\Http\Requests\PaymentScheduleRequest;
 use App\Http\Resources\PaymentScheduleResource;
 use App\Http\Traits\Payment;
 use App\Models\PaymentSchedule;
@@ -55,9 +56,9 @@ class PaymentScheduleController extends Controller
         return $data;
     }
 
-    public function update(Request $request, $id)
+    public function update(PaymentScheduleRequest $paymentScheduleRequest, $id)
     {
-        //
+        return $this->paymentScheduleRepository->update($id , $paymentScheduleRequest) ?"success" : "failed";
     }
 
 

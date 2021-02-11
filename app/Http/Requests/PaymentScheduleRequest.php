@@ -26,7 +26,6 @@ class PaymentScheduleRequest extends FormRequest
         return [
             'user_id' => 'required',
             'payment_head_id' => 'required',
-            'amount' => 'required',
             'paid_date' => 'required',
         ];
     }
