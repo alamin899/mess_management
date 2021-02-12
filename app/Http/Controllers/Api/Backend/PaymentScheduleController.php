@@ -62,9 +62,10 @@ class PaymentScheduleController extends Controller
     }
 
 
-    public function destroy($id)
+    public function destroy($id , Request  $request)
     {
-        //
+        return ($request->ajax()) ? $this->paymentScheduleRepository->destroy($id) : abort(401 , 'Bad request');
+
     }
 
     public function restore($id)

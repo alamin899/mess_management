@@ -27,6 +27,11 @@ class PaymentScheduleRepository
       return $store;
     }
 
+    public function destroy($id)
+    {
+        return $this->getPaymentSchedule($id)->delete();
+    }
+
     public function update($id , $request)
     {
         $paymentSchedule = $this->getPaymentSchedule($id);

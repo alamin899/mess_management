@@ -42,7 +42,7 @@
                                 </td>
                                 <td class="text-center" v-if="paymentSchedule.deleted_at == null">
                                     <a href="#" @click.prevent="updatePaymentScheduleId(paymentSchedule.id)" data-toggle="modal" data-target="#paymentScheduleEditModal"><span class="material-icons" title="edit">edit</span></a>
-                                    <a href="#"><span class="material-icons" style="color: red;"
+                                    <a href="#" @click.prevent="paymentScheduleDelete(paymentSchedule.id)"><span class="material-icons" style="color: red;"
                                                       title="delete">delete</span></a>
                                 </td>
                                 <td class="text-center" v-else>
@@ -101,6 +101,42 @@
             },
           updatePaymentScheduleId(id){
             this.paymentScheduleId = id
+          },
+          paymentScheduleDelete(id)
+          {
+            Swal.fire({
+              title: 'Are you sure?',
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+              if (result.value) {
+                axios.delete('/payment-schedule/'+id)
+                    .then((response) => {
+                      if (response.data == true)
+                      {
+                        Event.$emit('paymentScheduleEvent')
+                        toast.fire({
+                          icon: 'success',
+                          title: 'Payment Schedule deleted successfully'
+                        })
+                      }
+                      else
+                        toast.fire({
+                          icon: 'error',
+                          title: 'Something Went Wrong'
+                        })
+                    })
+                    .catch(()=>{
+                      toast.fire({
+                        icon: 'error',
+                        title: 'Something Went Wrong'
+                      })
+                    })
+              }
+            })
           },
         }
     }

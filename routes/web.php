@@ -16,6 +16,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/payment-schedule',[PaymentScheduleController::class, 'store'])->name('payment-schedule.store');
     Route::get('/payment-schedule/{payment_schedule}',[PaymentScheduleController::class, 'show'])->name('payment-schedule.show');
     Route::put('/payment-schedule/{payment_schedule}',[PaymentScheduleController::class, 'update'])->name('payment-schedule.update');
+    Route::delete('/payment-schedule/{payment_schedule}',[PaymentScheduleController::class, 'destroy'])->name('payment-schedule.destroy');
 
     //payment status
     Route::get('/payment-status',[PaymentScheduleController::class, 'paymentStatus'])->name('payment-status');
