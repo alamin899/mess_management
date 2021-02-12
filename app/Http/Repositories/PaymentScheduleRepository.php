@@ -27,6 +27,11 @@ class PaymentScheduleRepository
       return $store;
     }
 
+    public function destroy($id)
+    {
+        return $this->getPaymentSchedule($id)->delete();
+    }
+
     public function getPaymentSchedules($user_id = '', $payment_head_id = '', $payment_head_name = '', $status = '', $payment_status = '', $withTrashed = false)
     {
         ($withTrashed) ? $paymentSchedules = PaymentSchedule::withTrashed()->latest() : $paymentSchedules = PaymentSchedule::query()->latest();
