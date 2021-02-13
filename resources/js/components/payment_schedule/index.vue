@@ -46,7 +46,7 @@
                                                       title="delete">delete</span></a>
                                 </td>
                                 <td class="text-center" v-else>
-                                    <a href="#"><span class="material-icons" title="restore"
+                                    <a href="#" @click.prevent="paymentSchedueRestore(paymentSchedule.id)"><span class="material-icons" title="restore"
                                                       style="color: green">undo</span></a>
                                 </td>
                             </tr>
@@ -133,6 +133,39 @@
                       toast.fire({
                         icon: 'error',
                         title: 'Something Went Wrong'
+                      })
+                    })
+              }
+            })
+          },
+          paymentSchedueRestore(id) {
+            Swal.fire({
+              title: 'Are you sure?',
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Yes, Restore it!'
+            }).then((result) => {
+              if (result.value) {
+                axios.patch('/payment-schedule/' + id)
+                    .then((response) => {
+                      if (response.data == true) {
+                        Event.$emit('paymentScheduleEvent')
+                        toast.fire({
+                          icon: 'success',
+                          title: 'Payment Schedule Restore successfully'
+                        })
+                      } else
+                        toast.fire({
+                          icon: 'error',
+                          title: 'Something Went Wrong'
+                        })
+                    })
+                    .catch((error) => {
+                      toast.fire({
+                        icon: 'error',
+                        title: error
                       })
                     })
               }
