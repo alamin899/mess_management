@@ -68,9 +68,9 @@ class PaymentScheduleController extends Controller
 
     }
 
-    public function restore($id)
+    public function restore($id , Request $request)
     {
-        //
+        return ($request->ajax()) ? $this->paymentScheduleRepository->restore($id) : abort(401 , 'Bad request');
     }
 
     public function status($id, $status)
