@@ -4,15 +4,16 @@
 namespace App\Http\Repositories;
 
 
+use App\Http\Traits\Custom;
 use App\Models\PaymentHead;
 use phpDocumentor\Reflection\Types\Integer;
 
 class PaymentHeadRepository
 {
-
+    use Custom;
     public function getData($paginate = false , $withTrashed = false , $status = '')
     {
-        return ($paginate)? $this->getPaymentHeads('',$status, $withTrashed )->paginate(config('constant.PAGINATE'))
+        return ($paginate)? $this->getPaymentHeads('',$status, $withTrashed )->paginate($this->getPaginate())
             : $this->getPaymentHeads('',$status, $withTrashed)->get();
     }
 

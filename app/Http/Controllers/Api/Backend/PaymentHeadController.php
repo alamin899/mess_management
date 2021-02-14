@@ -24,7 +24,6 @@ class PaymentHeadController extends Controller
 
     public function listData(Request $request)
     {
-//        return ["PaymentHead::all()"];
         return ($request->ajax()) ? PaymentHeadResource::collection($this->paymentHeadRepository->getData(false,false)) : abort(401 , 'Bad request');
     }
 

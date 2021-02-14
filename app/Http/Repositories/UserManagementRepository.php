@@ -13,7 +13,7 @@ class UserManagementRepository
 {
     public function getData($paginate = false , $withTrashed = false )
     {
-        return ($paginate)? $this->getUsers('','', $withTrashed )->paginate(config('constant.PAGINATE'))
+        return ($paginate)? $this->getUsers('','', $withTrashed )->paginate($this->getPaginate())
             : $this->getUsers('','', $withTrashed)->get();
     }
 
