@@ -11,7 +11,7 @@ class PaymentScheduleRepository
     public function getData($paginate = false , $withTrashed = false , $status = '')
     {
         return ($paginate)? $this->getPaymentSchedules('','','',$status,'', $withTrashed )
-             ->paginate(config('constant.PAGINATE')) : $this->getPaymentSchedules('','','',$status,'', $withTrashed)->get();
+             ->paginate($this->getPaginate()) : $this->getPaymentSchedules('','','',$status,'', $withTrashed)->get();
     }
     public function show($id)
     {
