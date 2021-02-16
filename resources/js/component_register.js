@@ -20,6 +20,8 @@ Vue.component('payment-schedule-index', require('./components/payment_schedule/i
 Vue.component('payment-schedule-list', require('./components/payment_schedule/schedule_list.vue').default);
 Vue.component('payment-schedule-edit', require('./components/payment_schedule/edit.vue').default);
 
+// payment collection
+Vue.component('payment-collection-create', require('./components/payment_collection/create.vue').default);
 
                   // pagination
 Vue.component('pagination', require('./components/custome/pagination').default);
