@@ -22,7 +22,7 @@ class CreateMealsTable extends Migration
             $table->float('lunch')->nullable();
             $table->float('dinner')->nullable();
             $table->float('total_meal');
-            $table->string('remarks');
+            $table->string('remarks')->nullable();
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
             $table->integer('deleted_by')->nullable();
