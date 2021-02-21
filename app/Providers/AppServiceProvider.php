@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\Meal;
 use App\Models\PaymentCollection;
 use App\Models\PaymentHead;
 use App\Models\PaymentSchedule;
+use App\Observers\MealObserver;
 use App\Observers\PaymentCollectionObserver;
 use App\Observers\PaymentHeadObserver;
 use App\Observers\PaymentScheduleObserver;
@@ -34,5 +36,6 @@ class AppServiceProvider extends ServiceProvider
         PaymentHead::observe(PaymentHeadObserver::class);
         PaymentSchedule::observe(PaymentScheduleObserver::class);
         PaymentCollection::observe(PaymentCollectionObserver::class);
+        Meal::observe(MealObserver::class);
     }
 }
