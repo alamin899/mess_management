@@ -9,6 +9,7 @@ import paymentHeadCreate from './components/payment_head/create'
 import paymentHeadEdit from './components/payment_head/edit'
 import paymentScheduleIndex from './components/payment_schedule/index'
 import paymentScheduleCreate from './components/payment_schedule/create'
+import mealIndex from './components/meal/index'
 export const routes = [
     { path: '/admin-dashboard', component: adminDashboard }, //dashboard
     { path: '/admin-master', component: adminMaster },
@@ -27,4 +28,8 @@ export const routes = [
     // Payment Schedule
     { path: '/payment-schedule', component: paymentScheduleIndex },
     { path: '/payment-schedule-create', component: paymentScheduleCreate },
+
+    // Meal
+    { path: '/meal', component: mealIndex },
+
 ]

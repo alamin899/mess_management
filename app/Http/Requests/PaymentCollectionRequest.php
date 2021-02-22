@@ -24,7 +24,10 @@ class PaymentCollectionRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'user_id' => 'required',
+            'head_id' => 'required',
+            'payment_date' => 'required',
+            'amount' => 'required',
         ];
     }
 }

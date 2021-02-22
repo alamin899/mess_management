@@ -42,6 +42,23 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon"></i>
                         <p>
+                            Meal Management
+                            <i class="right fa fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <router-link to="meal" class="nav-link">
+                                <i class="fa fa-circle nav-icon"></i>
+                                <p>meal</p>
+                            </router-link>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon"></i>
+                        <p>
                             Payment Management
                             <i class="right fa fa-angle-left"></i>
                         </p>
