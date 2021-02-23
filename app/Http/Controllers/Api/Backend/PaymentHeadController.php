@@ -47,7 +47,9 @@ class PaymentHeadController extends Controller
         return ($this->paymentHeadRepository->update($id , $this->customRequest($paymentHeadRequest))) ?
             response()->json([
                 'message' => "success"
-            ],200)  : response()->json([
+            ],200)
+                :      // ternary operator
+            response()->json([
                 'message' => "failed",
             ]);
     }
