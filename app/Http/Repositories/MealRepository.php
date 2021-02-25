@@ -18,6 +18,10 @@ class MealRepository
             $meals->where('date', $date);
         });
         return $meals;
+    }
 
+    public function getMeal($id, $withTrashed = false)
+    {
+        return ($withTrashed)? Meal::withTrashed()->findOrFail($id) : Meal::findOrFail($id);
     }
 }
