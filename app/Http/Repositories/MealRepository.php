@@ -4,10 +4,17 @@
 namespace App\Http\Repositories;
 
 
+use App\Http\Traits\Custom;
 use App\Models\Meal;
 
 class MealRepository
 {
+    use Custom;
+    public function getData($paginate = false , $withTrashed = false )
+    {
+        return ($paginate)? $this->getMeals('','', $withTrashed )->paginate($this->getPaginate())
+            : $this->getMeals('','', $withTrashed)->get();
+    }
     public function getMeals($user_id = '', $date = '', $withTrashed = false)
     {
         ($withTrashed)? $meals = Meal::withTrashed()->latest(): $meals = Meal::query();
