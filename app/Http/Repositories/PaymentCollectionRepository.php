@@ -15,6 +15,11 @@ class PaymentCollectionRepository
         return ($paginate)? $this->getPaymentCollections('','',$status, $withTrashed )
             ->paginate($this->getPaginate()) : $this->getPaymentCollections('','',$status, $withTrashed)->get();
     }
+
+    public function store()
+    {
+        
+    }
     public function getPaymentCollections($user_id = '', $head_id = '', $status = '',  $withTrashed = false)
     {
         ($withTrashed) ? $paymentCollections = PaymentCollection::withTrashed()->latest() : $paymentCollections = PaymentCollection::query()->latest();
