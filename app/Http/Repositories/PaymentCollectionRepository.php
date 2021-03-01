@@ -29,4 +29,13 @@ class PaymentCollectionRepository
         });
         return $paymentCollections;
     }
+
+    public function getPaymentCollection($id, $withTrashed = false , $status = '')
+    {
+        $paymentCollection =($withTrashed)? PaymentCollection::withTrashed() : PaymentCollection::query();
+        $paymentCollection->when((!empty($status)), function ($paymentCollection) use ($status) {
+            $paymentCollection->where('status', $status);
+        });
+        return $paymentCollection->find($id);
+    }
 }
