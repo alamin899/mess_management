@@ -15,6 +15,19 @@ class MealRepository
         return ($paginate)? $this->getMeals('','', $withTrashed )->paginate($this->getPaginate())
             : $this->getMeals('','', $withTrashed)->get();
     }
+
+    public function store($request)
+    {
+        return Meal::firstOrCreate([
+            'user_id' => $request->user_id,
+            'date' => $request->date,
+            'breakfast' => $request->breakfast,
+            'lunch' => $request->lunch,
+            'dinner' => $request->dinner,
+            'total_meal' => $request->total_meal,
+            'remarks' => $request->remarks,
+        ]);
+    }
     public function getMeals($user_id = '', $date = '', $withTrashed = false)
     {
         ($withTrashed)? $meals = Meal::withTrashed()->latest(): $meals = Meal::query();
