@@ -16,9 +16,15 @@ class PaymentCollectionRepository
             ->paginate($this->getPaginate()) : $this->getPaymentCollections('','',$status, $withTrashed)->get();
     }
 
-    public function store()
+    public function store($request)
     {
-        
+        return PaymentCollection::create([
+            'user_id' => $request->user_id,
+            'head_id' => $request->head_id,
+            'payment_date' => $request->payment_date,
+            'amount' => $request->amount,
+            'remarks' => $request->remarks
+        ]);
     }
     public function getPaymentCollections($user_id = '', $head_id = '', $status = '',  $withTrashed = false)
     {
