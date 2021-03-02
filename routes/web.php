@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Backend\PaymentCollectionController;
 use App\Http\Controllers\Api\Backend\PaymentHeadController;
 use App\Http\Controllers\Api\Backend\PaymentScheduleController;
 use App\Http\Controllers\Api\Backend\UserManagementController;
@@ -22,6 +23,7 @@ Route::group(['middleware' => 'auth'], function () {
     //payment status
     Route::get('/payment-status',[PaymentScheduleController::class, 'paymentStatus'])->name('payment-status');
 
-
+    // payment collection
+    Route::post('/payment-collection',[PaymentCollectionController::class, 'store'])->name('payment-collection.store');
 
 });
