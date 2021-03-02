@@ -17,14 +17,15 @@ class MealController extends Controller
 
     public function index(Request $request)
     {
-        return ($request->ajax()) ? MealResource::collection($this->mealRepository->getData(true,true)) : abort(401 , 'Bad request');
+        return ($request->ajax()) ? MealResource::collection($this->mealRepository->getData(true, true)) : abort(401, 'Bad request');
     }
+
     public function store(MealRequest $mealRequest)
     {
         return ($this->mealRepository->store($mealRequest)) ?
             response()->json([
                 'message' => "success"
-            ],200)  : response()->json([
+            ], 200) : response()->json([
                 'message' => "failed",
             ]);
     }
