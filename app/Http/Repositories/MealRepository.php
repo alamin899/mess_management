@@ -19,7 +19,7 @@ class MealRepository
 
     public function store($request)
     {
-        return Meal::firstOrCreate([
+        return Meal::firstOrCreate([    // if data already exist not insert otherwise insert
             'user_id' => $request->user_id,
             'date' => $request->date,
             'breakfast' => $request->breakfast,
@@ -30,7 +30,7 @@ class MealRepository
         ]);
     }
 
-    public function getMeals($user_id = '', $date = '', $withTrashed = false)
+    public function getMeals($user_id = '', $date = '', $withTrashed = false) // multiple meal
     {
         ($withTrashed) ? $meals = Meal::withTrashed()->latest() : $meals = Meal::query();
         $meals->when((!empty($user_id)), function ($meals) use ($user_id) {
@@ -42,7 +42,7 @@ class MealRepository
         return $meals;
     }
 
-    public function getMeal($id, $withTrashed = false)
+    public function getMeal($id, $withTrashed = false)   //single meal
     {
         return ($withTrashed) ? Meal::withTrashed()->findOrFail($id) : Meal::findOrFail($id);
     }
