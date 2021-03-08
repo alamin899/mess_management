@@ -19,7 +19,7 @@ class MealRepository
 
     public function store($request)
     {
-        return Meal::firstOrCreate([
+        return Meal::firstOrCreate([    // if data already exist not insert otherwise insert
             'user_id' => $request->user_id,
             'date' => $request->date,
             'breakfast' => $request->breakfast,
