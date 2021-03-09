@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 
 class PaymentCollectionController extends Controller
 {
+    public $paymentCollectionRepository;
     public function __construct(PaymentCollectionRepository $paymentCollectionRepository)
     {
         $this->paymentCollectionRepository = $paymentCollectionRepository;
@@ -22,6 +23,7 @@ class PaymentCollectionController extends Controller
 
     public function store(PaymentCollectionRequest $paymentCollectionRequest)
     {
+        // store with ternary operator
         return ($this->paymentCollectionRepository->store($paymentCollectionRequest)) ?
             response()->json([
                 'message' => "success"
