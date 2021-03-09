@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 
 class PaymentCollectionController extends Controller
 {
+    public $paymentCollectionRepository;
     public function __construct(PaymentCollectionRepository $paymentCollectionRepository)
     {
         $this->paymentCollectionRepository = $paymentCollectionRepository;
