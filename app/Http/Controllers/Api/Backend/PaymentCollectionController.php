@@ -23,6 +23,7 @@ class PaymentCollectionController extends Controller
 
     public function store(PaymentCollectionRequest $paymentCollectionRequest)
     {
+        // store with ternary operator
         return ($this->paymentCollectionRepository->store($paymentCollectionRequest)) ?
             response()->json([
                 'message' => "success"
