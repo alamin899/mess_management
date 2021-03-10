@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 
 class UserManagementController extends Controller
 {
+    public $userManagementRepository;
     public function __construct(UserManagementRepository $userManagementRepository)
     {
         $this->userManagementRepository = $userManagementRepository;

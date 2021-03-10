@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 
 class MealController extends Controller
 {
+    public $melaRepository;
     public function __construct(MealRepository $mealRepository)
     {
         $this->mealRepository = $mealRepository;
