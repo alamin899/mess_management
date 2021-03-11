@@ -10,6 +10,7 @@ import paymentHeadEdit from './components/payment_head/edit'
 import paymentScheduleIndex from './components/payment_schedule/index'
 import paymentScheduleCreate from './components/payment_schedule/create'
 import mealIndex from './components/meal/index'
+import mealCreate from './components/meal/create'
 export const routes = [
     { path: '/admin-dashboard', component: adminDashboard }, //dashboard
     { path: '/admin-master', component: adminMaster },
@@ -31,5 +32,6 @@ export const routes = [
 
     // Meal
     { path: '/meal', component: mealIndex },
+    { path: '/meal-create', component: mealCreate },
 
 ]
