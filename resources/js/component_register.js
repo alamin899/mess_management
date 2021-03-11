@@ -24,7 +24,8 @@ Vue.component('payment-schedule-edit', require('./components/payment_schedule/ed
 Vue.component('payment-collection-create', require('./components/payment_collection/create.vue').default);
 
 // meal
-Vue.component('meal-create', require('./components/meal/index.vue').default);
+Vue.component('meal-index', require('./components/meal/index.vue').default);
+Vue.component('meal-create', require('./components/meal/create.vue').default);
 
 
 // pagination
