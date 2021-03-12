@@ -58,4 +58,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Meal::class);
     }
+    public function bazars()
+    {
+        return $this->hasMany(Bazar::class);
+    }
 }
