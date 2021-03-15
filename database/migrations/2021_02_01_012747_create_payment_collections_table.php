@@ -7,11 +7,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreatePaymentCollectionsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+
     public function up()
     {
         Schema::create((new PaymentCollection())->getTable(), function (Blueprint $table) {
@@ -28,12 +24,7 @@ class CreatePaymentCollectionsTable extends Migration
             $table->softDeletes();
         });
     }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+    
     public function down()
     {
         Schema::dropIfExists((new PaymentCollection())->getTable());
