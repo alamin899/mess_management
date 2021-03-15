@@ -7,11 +7,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateBazarsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create((new Bazar())->getTable(), function (Blueprint $table) {
@@ -28,11 +23,6 @@ class CreateBazarsTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists((new Bazar())->getTable());

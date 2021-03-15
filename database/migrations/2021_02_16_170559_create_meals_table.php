@@ -7,11 +7,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateMealsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+
     public function up()
     {
         Schema::create((new Meal())->getTable(), function (Blueprint $table) {
@@ -31,11 +27,6 @@ class CreateMealsTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists((new Meal())->getTable());
