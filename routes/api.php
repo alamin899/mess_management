@@ -1,19 +1,19 @@
 <?php
 
-use App\Http\Controllers\Api\Backend\PaymentHeadController;
-use App\Http\Controllers\Api\Backend\PaymentScheduleController;
-use App\Http\Controllers\Api\Backend\UserManagementController;
+use App\Http\Controllers\Web\Backend\PaymentHeadController;
+use App\Http\Controllers\Web\Backend\PaymentScheduleController;
+use App\Http\Controllers\Web\Backend\UserManagementController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
-| API Routes
+| Web Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register API routes for your application. These
+| Here is where you can register Web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
+| is assigned the "Web" middleware group. Enjoy building your Web!
 |
 */
 
