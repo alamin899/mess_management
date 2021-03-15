@@ -24,7 +24,7 @@ class CreatePaymentCollectionsTable extends Migration
             $table->softDeletes();
         });
     }
-    
+
     public function down()
     {
         Schema::dropIfExists((new PaymentCollection())->getTable());
