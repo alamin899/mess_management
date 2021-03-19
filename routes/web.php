@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\Api\Backend\PaymentCollectionController;
-use App\Http\Controllers\Api\Backend\PaymentHeadController;
-use App\Http\Controllers\Api\Backend\PaymentScheduleController;
-use App\Http\Controllers\Api\Backend\UserManagementController;
+use App\Http\Controllers\Web\Backend\PaymentCollectionController;
+use App\Http\Controllers\Web\Backend\PaymentHeadController;
+use App\Http\Controllers\Web\Backend\PaymentScheduleController;
+use App\Http\Controllers\Web\Backend\UserManagementController;
 use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('auth.login');

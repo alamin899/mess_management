@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\Backend;
+namespace App\Http\Controllers\Web\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Repositories\MealRepository;
