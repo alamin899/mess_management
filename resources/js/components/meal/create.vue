@@ -7,6 +7,9 @@
           <div class="card-header">
             <h3 class="card-title">Meal Create</h3>
           </div>
+          <div class="card-body">
+            
+          </div>
         </div>
       </div>
     </div>
