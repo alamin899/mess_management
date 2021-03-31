@@ -11,6 +11,8 @@ import paymentScheduleIndex from './components/payment_schedule/index'
 import paymentScheduleCreate from './components/payment_schedule/create'
 import mealIndex from './components/meal/index'
 import mealCreate from './components/meal/create'
+import paymentCollections from './components/payment_collection/index'
+import paymentCollectionCreate from './components/payment_collection/create'
 export const routes = [
     { path: '/admin-dashboard', component: adminDashboard }, //dashboard
     { path: '/admin-master', component: adminMaster },
@@ -33,5 +35,9 @@ export const routes = [
     // Meal
     { path: '/meal', component: mealIndex },
     { path: '/meal-create', component: mealCreate },
+
+    // Payment Collection
+    { path: '/payment-collection', component: paymentCollections },
+    { path: '/payment-collection-create', component: paymentCollectionCreate },
 
 ]

@@ -21,6 +21,7 @@ Vue.component('payment-schedule-list', require('./components/payment_schedule/sc
 Vue.component('payment-schedule-edit', require('./components/payment_schedule/edit.vue').default);
 
 // payment collection
+Vue.component('payment-collection-index', require('./components/payment_collection/index.vue').default);
 Vue.component('payment-collection-create', require('./components/payment_collection/create.vue').default);
 
 // meal
