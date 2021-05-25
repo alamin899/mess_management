@@ -8,11 +8,12 @@ use App\Models\PaymentSchedule;
 
 class PaymentScheduleRepository
 {
-    public function getData($paginate = false , $withTrashed = false , $status = '')
+    public function getData($paginate = false, $withTrashed = false, $status = '')
     {
-        return ($paginate)? $this->getPaymentSchedules('','','',$status,'', $withTrashed )
-             ->paginate($this->getPaginate()) : $this->getPaymentSchedules('','','',$status,'', $withTrashed)->get();
+        return ($paginate) ? $this->getPaymentSchedules('', '', '', $status, '', $withTrashed)
+            ->paginate($this->getPaginate()) : $this->getPaymentSchedules('', '', '', $status, '', $withTrashed)->get();
     }
+
     public function show($id)
     {
         return $this->getPaymentSchedule($id);
@@ -20,11 +21,11 @@ class PaymentScheduleRepository
 
     public function store($request)
     {
-      $data = array_chunk($request , count($request)/2);
-      foreach ($data as $req){
-          $store = PaymentSchedule::insert($req);
-      }
-      return $store;
+        $data = array_chunk($request, count($request) / 2);
+        foreach ($data as $req) {
+            $store = PaymentSchedule::insert($req);
+        }
+        return $store;
     }
 
     public function destroy($id)
@@ -34,10 +35,10 @@ class PaymentScheduleRepository
 
     public function restore($id)
     {
-        return $this->getPaymentSchedule($id , true)->restore();
+        return $this->getPaymentSchedule($id, true)->restore();
     }
 
-    public function update($id , $request)
+    public function update($id, $request)
     {
         $paymentSchedule = $this->getPaymentSchedule($id);
         $paymentSchedule->user_id = $request->user_id;
@@ -51,7 +52,7 @@ class PaymentScheduleRepository
 
     public function getPaymentSchedules($user_id = '', $payment_head_id = '', $payment_head_name = '', $status = '', $payment_status = '', $withTrashed = false)
     {
-        ($withTrashed) ? $paymentSchedules = PaymentSchedule::withTrashed()->latest() : $paymentSchedules = PaymentSchedule::query()->latest();
+        $paymentSchedules = ($withTrashed) ? PaymentSchedule::withTrashed()->latest() : PaymentSchedule::query()->latest();
         $paymentSchedules->when((!empty($user_id)), function ($paymentSchedules) use ($user_id) {
             $paymentSchedules->where('user_id', $user_id);
         });
@@ -59,7 +60,7 @@ class PaymentScheduleRepository
             $paymentSchedules->where('payment_head_id', $payment_head_id);
         });
         $paymentSchedules->when((!empty($payment_head_name)), function ($paymentSchedules) use ($payment_head_name) {
-            $this->paymentScheduleByHeadName($paymentSchedules , $payment_head_name);
+            $this->paymentScheduleByHeadName($paymentSchedules, $payment_head_name);
         });
         $paymentSchedules->when((!empty($status)), function ($paymentSchedules) use ($status) {
             $paymentSchedules->where('status', $status);
@@ -70,20 +71,20 @@ class PaymentScheduleRepository
         return $paymentSchedules;
     }
 
-    public function getPaymentSchedule($id  , $withTrashed = '' , $status = '')
+    public function getPaymentSchedule($id, $withTrashed = '', $status = '')
     {
-        $paymentSchedule =($withTrashed)? PaymentSchedule::withTrashed() : PaymentSchedule::query();
+        $paymentSchedule = ($withTrashed) ? PaymentSchedule::withTrashed() : PaymentSchedule::query();
         $paymentSchedule->when((!empty($status)), function ($paymentSchedule) use ($status) {
             $paymentSchedule->where('status', $status);
         });
         return $paymentSchedule->find($id);
     }
 
-    protected function paymentScheduleByHeadName($paymentSchedules , $payment_head_name)
+    protected function paymentScheduleByHeadName($paymentSchedules, $payment_head_name)
     {
-        $paymentSchedules->whereHas('paymentHead',function ($paymentHead) use ($payment_head_name){
-                return $paymentHead->where('name', $payment_head_name);
-            });
+        $paymentSchedules->whereHas('paymentHead', function ($paymentHead) use ($payment_head_name) {
+            return $paymentHead->where('name', $payment_head_name);
+        });
     }
 
 }

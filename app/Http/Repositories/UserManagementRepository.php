@@ -11,10 +11,12 @@ use Image;
 
 class UserManagementRepository
 {
-    public function getData($paginate = false , $withTrashed = false )
+    public function getData($paginate = false, $withTrashed = false)
     {
-        return ($paginate)? $this->getUsers('','', $withTrashed )->paginate($this->getPaginate())
-            : $this->getUsers('','', $withTrashed)->get();
+        return ($paginate) ?
+            $this->getUsers('', '', $withTrashed)->paginate($this->getPaginate())
+            :
+            $this->getUsers('', '', $withTrashed)->get();
     }
 
     public function show($id)
@@ -33,14 +35,13 @@ class UserManagementRepository
         ]);
     }
 
-    public function update($id , $request)
+    public function update($id, $request)
     {
         $user = $this->getUser($id);
         $user->name = $request->name;
         $user->email = $request->email;
         $user->status = $request->status;
-        if ($request->image != null)
-        {
+        if ($request->image != null) {
             $user->image = $this->imageUpload($request->image);
         }
         $user->update();
@@ -49,28 +50,28 @@ class UserManagementRepository
 
     public function imageUpload($image)
     {
-        if ($image){
-            $strpos = strpos($image,';');
-            $sub = substr($image,0,$strpos);
-            $extention = explode('/',$sub)[1];
-            $name = time().".".$extention;
+        if ($image) {
+            $strpos = strpos($image, ';');
+            $sub = substr($image, 0, $strpos);
+            $extention = explode('/', $sub)[1];
+            $name = time() . "." . $extention;
             $img = Image::make($image)->resize(200, 200);
             $folderPath = "file/images/";
-            $upload_path = public_path()."/".$folderPath;
-            if ($img->save($upload_path.$name)){
+            $upload_path = public_path() . "/" . $folderPath;
+            if ($img->save($upload_path . $name)) {
                 return $name;
             }
-        }
-        else return null;
+        } else return null;
     }
 
-    public function passUpdate($request,$id)
+    public function passUpdate($request, $id)
     {
         $user = $this->getUser($id);
         $user->password = Hash::make($request->password);
         $user->update();
         return $user;
     }
+
     public function destroy($id)
     {
         return $this->getUser($id)->delete();
@@ -78,12 +79,12 @@ class UserManagementRepository
 
     public function restore($id)
     {
-        return $this->getUser($id , true)->restore();
+        return $this->getUser($id, true)->restore();
     }
 
-    public function getUsers($name = '' , $email = '' , $withTrashed = false)
+    public function getUsers($name = '', $email = '', $withTrashed = false)
     {
-        ($withTrashed)?$users = User::withTrashed()->latest() : $users = User::query()->latest() ;
+        $users = ($withTrashed) ? User::withTrashed()->latest() : User::query()->latest();
         $users->when((!empty($name)), function ($users) use ($name) {
             $users->where('name', $name);
         });
@@ -93,16 +94,9 @@ class UserManagementRepository
         return $users;
     }
 
-    public function getUser($id , $withTrashed = false)
+    public function getUser($id, $withTrashed = false)
     {
-        if ($withTrashed)
-        {
-            $user = User::withTrashed()->find($id);
-        }
-        else{
-            $user = User::find($id);
-        }
-        return $user;
+        return ($withTrashed) ? User::withTrashed()->find($id) : User::find($id);
     }
 
 }
