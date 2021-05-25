@@ -10,10 +10,13 @@ use App\Models\PaymentCollection;
 class PaymentCollectionRepository
 {
     use Custom;
-    public function getData($paginate = false , $withTrashed = false , $status = '')
+
+    public function getData($paginate = false, $withTrashed = false, $status = '')
     {
-        return ($paginate)? $this->getPaymentCollections('','',$status, $withTrashed )
-            ->paginate($this->getPaginate()) : $this->getPaymentCollections('','',$status, $withTrashed)->get();
+        return ($paginate) ?
+            $this->getPaymentCollections('', '', $status, $withTrashed)->paginate($this->getPaginate())
+            :
+            $this->getPaymentCollections('', '', $status, $withTrashed)->get();
     }
 
     public function store($request)
@@ -26,9 +29,10 @@ class PaymentCollectionRepository
             'remarks' => $request->remarks
         ]);
     }
-    public function getPaymentCollections($user_id = '', $head_id = '', $status = '',  $withTrashed = false)
+
+    public function getPaymentCollections($user_id = '', $head_id = '', $status = '', $withTrashed = false)
     {
-        ($withTrashed) ? $paymentCollections = PaymentCollection::withTrashed()->latest() : $paymentCollections = PaymentCollection::query()->latest();
+        $paymentCollections = ($withTrashed) ? PaymentCollection::withTrashed()->latest() : PaymentCollection::query()->latest();
         $paymentCollections->when((!empty($user_id)), function ($paymentCollections) use ($user_id) {
             $paymentCollections->where('user_id', $user_id);
         });
@@ -41,9 +45,9 @@ class PaymentCollectionRepository
         return $paymentCollections;
     }
 
-    public function getPaymentCollection($id, $withTrashed = false , $status = '')
+    public function getPaymentCollection($id, $withTrashed = false, $status = '')
     {
-        $paymentCollection =($withTrashed)? PaymentCollection::withTrashed() : PaymentCollection::query();
+        $paymentCollection = ($withTrashed) ? PaymentCollection::withTrashed() : PaymentCollection::query();
         $paymentCollection->when((!empty($status)), function ($paymentCollection) use ($status) {
             $paymentCollection->where('status', $status);
         });

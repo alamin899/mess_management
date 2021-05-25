@@ -11,10 +11,13 @@ use phpDocumentor\Reflection\Types\Integer;
 class PaymentHeadRepository
 {
     use Custom;
-    public function getData($paginate = false , $withTrashed = false , $status = '')
+
+    public function getData($paginate = false, $withTrashed = false, $status = '')
     {
-        return ($paginate)? $this->getPaymentHeads('',$status, $withTrashed )->paginate($this->getPaginate())
-            : $this->getPaymentHeads('',$status, $withTrashed)->get();
+        return ($paginate) ?
+            $this->getPaymentHeads('', $status, $withTrashed)->paginate($this->getPaginate())
+            :
+            $this->getPaymentHeads('', $status, $withTrashed)->get();
     }
 
     public function store($request)
@@ -76,9 +79,9 @@ class PaymentHeadRepository
         return $paymentHeads;
     }
 
-    public function getPaymentHead($id, $withTrashed = false , $status = '')
+    public function getPaymentHead($id, $withTrashed = false, $status = '')
     {
-        $paymentHead =($withTrashed)? PaymentHead::withTrashed() : PaymentHead::query();
+        $paymentHead = ($withTrashed) ? PaymentHead::withTrashed() : PaymentHead::query();
         $paymentHead->when((!empty($status)), function ($paymentHead) use ($status) {
             $paymentHead->where('status', $status);
         });
